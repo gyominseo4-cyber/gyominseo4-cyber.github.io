@@ -3,47 +3,423 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Coin Farming Uploader · 코인 파밍</title>
-<meta name="description" content="코인 파밍 유튜브 채널 운영자가 자기 채널에 영상을 올리는 데 쓰는 PC 프로그램 안내">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
-<link rel="stylesheet" href="style.css">
+<title>궁금한 건, 풀어 드립니다 | 파밍 · MINJINE</title>
+<meta name="description" content="프로그램으로 될지 궁금한 일, 물어보세요. 1인 프로그램 제작자 서교민(파밍 · MINJINE)이 카카오톡으로 직접 답합니다.">
+<link rel="canonical" href="https://gyominseo4-cyber.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="궁금한 건, 풀어 드립니다 | 파밍 · MINJINE">
+<meta property="og:description" content="손으로 하던 일을 그 일만을 위한 프로그램으로. 제작 문의는 카카오톡으로.">
+<meta property="og:url" content="https://gyominseo4-cyber.github.io/">
+<meta property="og:image" content="https://gyominseo4-cyber.github.io/exchange.jpg">
+<meta name="theme-color" content="#0A0D12">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230A0D12'/%3E%3Cpath d='M14 48V16h8l10 18 10-18h8v32h-8V31l-10 17-10-17v17z' fill='%23FFB02E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* 파밍 · MINJINE 홈페이지 (2026-11-01)
+   방향: 고정된 포스터 — '궁금한 건,' 과 '풀어 드립니다.' 는 제자리에 있고, 그 사이로 사람들이 손으로 하던 일의 옛 사진이 지나간다.
+   색: MINJINE 앱의 밤색 바탕 + 호박색 글자 (바탕 하나·글자 하나·강조 하나) · 글꼴: Pretendard 하나 · 크기 다섯 단계 */
+:root{
+  --bg:#0A0D12; --surface:#121720; --ink:#FFB02E; --muted:#C9922F; --accent:#FFB02E; --accent-ink:#0A0D12; --accent-hover:#FFC25A;
+  --scrim:rgba(10,13,18,.68);
+  --m:32px; --gut:24px; --r:4px;
+  --s1:16px; --s2:18px; --s3:clamp(21px,1.9vw,28px); --s4:clamp(30px,4.6vw,88px); --s5:clamp(88px,16vw,280px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (max-width:720px){ :root{ --m:16px; --gut:16px; } }
+*{ box-sizing:border-box; }
+html{ background:var(--bg); -webkit-text-size-adjust:100%; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:var(--s2); line-height:1.55; word-break:keep-all; overflow-wrap:break-word; -webkit-font-smoothing:antialiased; font-variant-numeric:tabular-nums; }
+a{ color:inherit; text-underline-offset:.22em; text-decoration-thickness:1px; }
+img,video{ display:block; max-width:100%; }
+h1,h2,h3,p{ margin:0; }
+::selection{ background:var(--ink); color:var(--bg); }
+:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+[tabindex="-1"]:focus{ outline:none; }
+.sr{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.skip{ position:absolute; left:var(--m); top:-80px; z-index:20; background:var(--ink); color:var(--bg); padding:12px 16px; border-radius:var(--r); font-size:var(--s1); font-weight:700; text-decoration:none; }
+.skip:focus{ top:16px; }
+.btn{ display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 20px; background:var(--accent); color:var(--accent-ink); border:0; border-radius:var(--r);
+  font:inherit; font-size:var(--s1); font-weight:700; text-decoration:none; cursor:pointer; transition:transform .16s var(--ease), background-color .16s; touch-action:manipulation; }
+.btn:hover{ background:var(--accent-hover); }
+.btn:active{ transform:scale(.97); }
+
+/* ---------- 첫 화면: 문장이 가운데 틀에 갈라진다 ---------- */
+.hero{ position:relative; height:calc(100svh + 100svh); }
+.stage{ position:sticky; top:0; height:100svh; overflow:hidden; }
+.bar{ position:absolute; top:0; left:0; right:0; z-index:4; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:20px var(--m); font-size:var(--s1); }
+.mark{ font-weight:800; text-decoration:none; letter-spacing:-.01em; white-space:nowrap; }
+.bar nav{ display:flex; align-items:center; gap:28px; }
+.bar nav a:not(.btn){ text-decoration:none; padding:10px 0; transition:opacity .16s; }
+.bar nav a:not(.btn):hover{ text-decoration:underline; }
+.half{ position:absolute; top:50%; z-index:3; transform:translateY(-50%); font-size:var(--s4); font-weight:500; letter-spacing:-.02em; line-height:1.05; white-space:nowrap; }
+.half.a{ left:var(--m); } .half.b{ right:var(--m); }
+.reel{ position:absolute; top:0; bottom:0; left:50%; width:40vw; transform:translateX(-50%); z-index:1; overflow:hidden; }
+.track{ will-change:transform; }
+html:not(.js) .track{ padding-top:calc(50svh - 25vw); }
+.track figure{ margin:0 0 24px; position:relative; }
+.track img{ width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; border-radius:var(--r); filter:contrast(1.06) brightness(.92); }
+.track figcaption{ position:absolute; left:12px; bottom:12px; padding:6px 12px; background:var(--scrim); border-radius:var(--r); font-size:var(--s1); white-space:nowrap; }
+.sub{ position:absolute; left:var(--m); bottom:32px; z-index:3; width:min(27vw,440px); font-size:var(--s2); }
+.cta-phone{ display:none; }
+
+/* ---------- 자주 받는 질문: 큰 질문, 옆에 답 ---------- */
+/* 질문 칸은 브랜드 호박색 바탕 한 장 (글자는 밤색) */
+.faq{ padding:160px var(--m); display:grid; row-gap:72px; background:var(--ink); color:var(--bg); }
+.faq ::selection{ background:var(--bg); color:var(--ink); }
+.faq :focus-visible{ outline-color:var(--bg); }
+.faq-row{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--gut); align-items:baseline; }
+.q{ grid-column:1 / span 7; font-size:var(--s4); font-weight:500; line-height:1.1; letter-spacing:-.02em; }
+.faq-head .q{ color:#5A3F0E; }
+.ans{ grid-column:9 / span 4; font-size:var(--s2); line-height:1.6; max-width:40ch; }
+
+/* ---------- 만든 것: 한 장씩 덮이는 판 ---------- */
+.work{ position:relative; }
+.panel{ position:relative; height:100svh; overflow:hidden; background:var(--bg); }
+.panel img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.3); filter:contrast(1.06) brightness(.8); transition:transform 9s var(--ease); }
+.panel.is-in img{ transform:scale(1.16); }
+.row{ position:absolute; left:0; right:0; top:50%; height:96px; transform:translateY(-50%); background:var(--scrim); display:flex; align-items:center; justify-content:space-between; padding:0 var(--m); }
+.row .t{ position:absolute; left:10%; top:50%; transform:translateY(-50%); font-size:var(--s3); font-weight:700; letter-spacing:-.01em; white-space:nowrap; }
+.row .yr, .row .fact{ font-size:var(--s1); position:relative; }
+
+/* ---------- 일하는 순서: 낱말 하나씩 ---------- */
+.step{ position:relative; height:100svh; overflow:hidden; background:var(--bg); }
+.step .media{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.05) brightness(.5); }
+.verbwrap{ position:absolute; left:0; right:0; top:50%; z-index:1; transform:translateY(-50%); text-align:center; pointer-events:none; }
+.verb{ font-size:var(--s5); font-weight:800; line-height:.95; letter-spacing:-.04em; }
+.say{ position:absolute; left:var(--m); bottom:32px; z-index:2; max-width:min(560px, calc(100% - 2*var(--m))); padding:16px 20px; background:var(--scrim); border-radius:var(--r); font-size:var(--s2); }
+
+/* ---------- 소개: 옆에 사실, 넓은 문단 ---------- */
+.about{ padding:160px var(--m); background:var(--surface); }
+.ab-row{ display:grid; grid-template-columns:calc(34vw - var(--m)) minmax(0,1fr) 10vw; align-items:start; }
+.facts{ margin:0; display:grid; gap:20px; font-size:var(--s1); width:220px; }
+.facts dt{ color:var(--muted); } .facts dd{ margin:0; font-weight:600; }
+.lead{ font-size:var(--s3); line-height:1.4; letter-spacing:-.01em; }
+.ab-row.two{ margin-top:120px; }
+.word{ font-size:var(--s1); color:var(--muted); }
+.lists{ display:flex; gap:64px; flex-wrap:wrap; }
+.lists ul{ list-style:none; margin:0; padding:0; width:280px; display:grid; gap:12px; font-size:var(--s1); }
+.lists li{ display:flex; justify-content:space-between; gap:16px; }
+.lists li span{ color:var(--muted); }
+.lists a{ text-decoration:none; } .lists a:hover{ text-decoration:underline; }
+
+/* ---------- 문의: 사진 위 카드 하나 ---------- */
+.contact{ position:relative; min-height:100svh; overflow:hidden; }
+.contact > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:30% 50%; filter:contrast(1.05) brightness(.62); }
+.card{ position:relative; z-index:1; margin:64px var(--m) 64px auto; width:440px; max-width:calc(100% - 2*var(--m)); background:var(--surface); border-radius:var(--r); padding:32px; display:grid; gap:20px; }
+.card h2{ font-size:var(--s3); font-weight:400; letter-spacing:-.01em; }
+.ways{ margin:0; display:grid; gap:10px; font-size:var(--s1); }
+.ways div{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.ways dt{ color:var(--muted); } .ways dd{ margin:0; display:flex; align-items:center; gap:10px; }
+.mini{ min-height:36px; padding:0 12px; background:var(--bg); color:var(--ink); border:0; border-radius:var(--r); font:inherit; font-size:var(--s1); cursor:pointer; transition:transform .16s var(--ease), background-color .16s; }
+.mini:hover{ background:#1A212C; } .mini:active{ transform:scale(.96); }
+.askl{ font-size:var(--s1); font-weight:700; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chips .mini[aria-pressed="true"]{ background:var(--ink); color:var(--bg); }
+.card textarea{ width:100%; min-height:120px; resize:vertical; padding:12px 14px; background:var(--bg); color:var(--ink); border:1px solid #3A3220; border-radius:var(--r); font:inherit; font-size:var(--s1); line-height:1.5; }
+.card textarea::placeholder{ color:var(--muted); opacity:1; }
+.card textarea:focus-visible{ outline:2px solid var(--ink); outline-offset:1px; }
+.note{ font-size:var(--s1); color:var(--muted); min-height:1.5em; }
+.btn.big{ min-height:52px; width:100%; font-size:var(--s2); }
+
+/* ---------- 끝: 사진 반, 메뉴 반 ---------- */
+.foot{ display:grid; grid-template-columns:1fr 1fr; min-height:100svh; }
+.fphoto{ position:relative; overflow:hidden; }
+.fphoto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:62% 70%; transform:scale(1.25); filter:contrast(1.06) brightness(.85); }
+.fside{ background:var(--surface); padding:80px var(--m) 32px; display:flex; flex-direction:column; gap:40px; }
+.fmenu{ display:grid; gap:28px; justify-items:start; }
+.fmenu a{ font-size:var(--s4); font-weight:700; line-height:1; letter-spacing:-.02em; text-decoration:none; transition:transform .2s var(--ease), color .2s; }
+@media (hover:hover){ .fmenu:hover a{ color:var(--muted); } .fmenu a:hover{ color:var(--ink); transform:translateX(12px); } }
+.fblocks{ display:flex; flex-wrap:wrap; gap:16px 64px; font-size:var(--s1); }
+.uploader{ font-size:var(--s1); max-width:62ch; display:grid; gap:8px; }
+.uploader b{ color:var(--ink); font-weight:700; }
+.legal{ margin-top:auto; font-size:var(--s1); color:var(--muted); display:grid; gap:12px; }
+.credits summary{ cursor:pointer; color:var(--ink); }
+.credits ul{ margin:12px 0 0; padding-left:20px; display:grid; gap:6px; }
+
+/* ---------- 들어오는 움직임 (스크립트가 있을 때만 숨겼다가 보여 줌) ---------- */
+html.js [data-reveal]{ opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease); transition-delay:var(--d,0ms); }
+html.js [data-reveal].is-in{ opacity:1; transform:none; }
+
+/* ---------- 휴대폰·좁은 화면 ---------- */
+@media (max-width:1000px){
+  /* 좁은 화면: 고정하지 않음 · 틀 하나(첫 사진)만 · 문장은 틀 위아래 */
+  .hero{ height:auto; }
+  .stage{ position:relative; height:auto; overflow:visible; display:flex; flex-direction:column; padding:76px var(--m) 32px; gap:14px; }
+  .bar{ padding:14px var(--m); }
+  .bar nav a:not(.btn){ display:none; }
+  .half{ position:static; transform:none; font-size:clamp(30px,9vw,52px); }
+  .half.b{ align-self:flex-end; }
+  .reel{ position:relative; left:auto; top:auto; bottom:auto; width:auto; transform:none; overflow:visible; }
+  .track{ transform:none !important; padding-top:0 !important; }
+  .track figure{ margin:0; }
+  .track figure + figure{ display:none; }
+  .track img{ aspect-ratio:4/3; }
+  .sub{ position:static; width:auto; font-size:var(--s1); }
+  .cta-phone{ display:flex; width:100%; min-height:52px; font-size:var(--s2); }
+  .faq{ padding:120px var(--m); row-gap:56px; }
+  .faq-row{ grid-template-columns:minmax(0,1fr); row-gap:12px; }
+  .q, .ans{ grid-column:1; }
+  .panel{ height:82svh; }
+  .row{ top:auto; bottom:20px; transform:none; height:auto; display:grid; grid-template-columns:1fr auto; row-gap:6px; padding:14px var(--m); }
+  .row .t{ position:static; transform:none; grid-column:1 / -1; grid-row:1; white-space:normal; }
+  .row .yr{ grid-row:2; } .row .fact{ grid-row:2; justify-self:end; }
+  .verb{ font-size:21vw; }
+  .say{ left:var(--m); right:var(--m); bottom:20px; max-width:none; font-size:var(--s1); }
+  .about{ padding:120px var(--m); }
+  .ab-row{ grid-template-columns:minmax(0,1fr); row-gap:40px; }
+  .ab-row .lead{ order:-1; }
+  .facts{ width:auto; grid-template-columns:1fr 1fr; }
+  .ab-row.two{ margin-top:64px; row-gap:16px; }
+  .word{ color:var(--ink); font-weight:700; }
+  .lists{ flex-direction:column; gap:12px; } .lists ul{ width:100%; }
+  .contact{ min-height:0; display:flex; flex-direction:column; }
+  .contact > img{ position:relative; height:70svh; }
+  .card{ margin:-80px var(--m) 0; width:auto; max-width:none; }
+  .foot{ grid-template-columns:minmax(0,1fr); min-height:0; }
+  .fphoto{ height:50svh; }
+  .fside{ padding:48px var(--m) 32px; }
+  .fmenu{ gap:20px; } .fmenu a{ font-size:clamp(30px,8vw,52px); }
+}
+@media (prefers-reduced-motion: reduce) and (min-width:1001px){ .hero{ height:100svh; } }
+@media (prefers-reduced-motion: reduce){
+  html.js [data-reveal]{ opacity:1; transform:none; transition:none; }
+  .panel img, .fphoto img{ transition:none; transform:scale(1.16); }
+  .btn, .mini, .fmenu a{ transition:none; }
+}
+</style>
 </head>
 <body>
-<main class="wrap">
-  <header class="top">
-    <p class="kicker">코인 파밍 · Coin Farming</p>
-    <h1>Coin Farming Uploader</h1>
-    <p class="lead">코인 파밍 유튜브 채널 운영자가 <b>자기 채널</b>에 영상을 예약해서 올리는 데 쓰는 PC 프로그램입니다.<br>
-      A desktop tool the owner of the “코인 파밍” YouTube channel uses to schedule and upload videos to their own channel.</p>
-  </header>
-
-  <section class="card">
-    <h2>하는 일 · What it does</h2>
-    <ul>
-      <li>운영자 PC에서 만든 영상을 운영자 본인의 유튜브 채널에 올리고, 공개 시각을 예약합니다. (YouTube Data API)</li>
-      <li>운영자 채널의 조회 수 같은 통계를 읽어, 운영자 PC 화면에만 보여 줍니다. (YouTube Analytics API)</li>
-      <li>Uploads videos made on the owner’s PC to the owner’s own YouTube channel and schedules their publish time (YouTube Data API).</li>
-      <li>Reads the owner’s channel statistics and shows them only on the owner’s own PC (YouTube Analytics API).</li>
-    </ul>
+<a class="skip" href="#faq">본문으로 건너뛰기</a>
+<main>
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="stage">
+      <header class="bar">
+        <a class="mark" href="#top">파밍 · MINJINE</a>
+        <nav aria-label="메뉴">
+          <a href="#faq">질문</a><a href="#work">만든 것</a><a href="#how">진행</a>
+          <a class="btn" href="https://open.kakao.com/o/pokOdmFi" target="_blank" rel="noopener">카톡으로 묻기</a>
+        </nav>
+      </header>
+      <h1 id="hero-title" class="sr">궁금한 건, 풀어 드립니다.</h1>
+      <p class="half a" aria-hidden="true">궁금한 건,</p>
+      <div class="reel" aria-hidden="true">
+        <div class="track">
+          <figure><img src="computers.jpg" width="1150" height="900" alt=""><figcaption>손으로 하던 계산</figcaption></figure>
+          <figure><img src="typing.jpg" width="1280" height="1146" alt=""><figcaption>쌓여 가는 서류</figcaption></figure>
+          <figure><img src="gauges.jpg" width="1800" height="1350" alt=""><figcaption>눈을 뗄 수 없는 숫자</figcaption></figure>
+          <figure><img src="records.jpg" width="1800" height="1830" alt=""><figcaption>매일 내보낼 방송</figcaption></figure>
+        </div>
+      </div>
+      <p class="half b" aria-hidden="true">풀어 드립니다.</p>
+      <p class="sub">1인 프로그램 제작자 서교민입니다. 손으로 하던 일을, 그 일만을 위한 프로그램으로 바꿔 드립니다.</p>
+      <a class="btn cta-phone" href="https://open.kakao.com/o/pokOdmFi" target="_blank" rel="noopener">카톡으로 묻기</a>
+    </div>
   </section>
 
-  <section class="card">
-    <h2>누가 쓰나요 · Who uses it</h2>
-    <p>코인 파밍 채널 운영자 한 사람만 씁니다. 다른 사람의 계정이나 정보를 받지 않습니다.<br>
-      Only the channel owner uses this tool. It does not collect other people’s accounts or data.</p>
+  <section class="faq" id="faq" aria-labelledby="faq-h" tabindex="-1">
+    <div class="faq-row faq-head"><h2 class="q" id="faq-h">자주 받는 질문</h2></div>
+    <div class="faq-row"><h3 class="q" data-reveal>매일 하는 엑셀 정리, 대신 될까요?</h3>
+      <p class="ans" data-reveal style="--d:90ms">네. 파일을 모으고 합치고 보고서로 만드는 일을 버튼 한 번으로 줄여 드립니다. 지금 쓰시는 엑셀 양식은 그대로 둡니다.</p></div>
+    <div class="faq-row"><h3 class="q" data-reveal>시세가 움직이면 바로 알 수 있나요?</h3>
+      <p class="ans" data-reveal style="--d:90ms">정해 둔 조건이 되면 휴대폰으로 곧바로 알려 주는 프로그램을 만듭니다. 무엇을 지켜볼지는 함께 정하고, 사고팔라는 권유는 하지 않습니다.</p></div>
+    <div class="faq-row"><h3 class="q" data-reveal>영상을 매일 올리기가 벅차요.</h3>
+      <p class="ans" data-reveal style="--d:90ms">자료 정리부터 영상 만들기, 예약 올리기까지 한 줄로 이어지게 만들어 손이 덜 가게 해 드립니다.</p></div>
+    <div class="faq-row"><h3 class="q" data-reveal>거래 장부를 한 화면에 모을 수 있나요?</h3>
+      <p class="ans" data-reveal style="--d:90ms">거래 입력, 미수금, 세금계산서 발행 현황을 한 화면에 모은 관리 프로그램을 만들어 실제 회사에서 쓰고 있습니다.</p></div>
+    <div class="faq-row"><h3 class="q" data-reveal>휴대폰 앱처럼 쓰는 서비스도 되나요?</h3>
+      <p class="ans" data-reveal style="--d:90ms">네. 설치 없이 홈 화면에 올려 쓰는 앱과 회원 관리까지 직접 만들어 운영하고 있습니다.</p></div>
+    <div class="faq-row"><h3 class="q" data-reveal>두 컴퓨터를 한 몸처럼 쓰고 싶어요.</h3>
+      <p class="ans" data-reveal style="--d:90ms">두 컴퓨터 사이에 파일을 주고받고, 한쪽에서 다른 쪽 프로그램을 켜고 끄는 도구를 만들 수 있습니다.</p></div>
+    <div class="faq-row"><h3 class="q" data-reveal>이런 것도 프로그램으로 될까요?</h3>
+      <p class="ans" data-reveal style="--d:90ms">한 줄이면 충분합니다. 될지, 어떻게 하면 될지부터 답해 드립니다. <a href="#contact">아래 칸에 적어 카카오톡으로 보내 주세요.</a></p></div>
   </section>
 
-  <section class="card">
-    <h2>정보 처리 · Data</h2>
-    <p>구글 로그인 열쇠와 채널 정보는 운영자 PC에만 저장되고, 다른 서버로 보내거나 남에게 넘기지 않습니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>을 보세요.<br>
-      Sign-in tokens and channel data stay on the owner’s PC and are never sent to other servers or shared. See the <a href="privacy.html">Privacy Policy</a>.</p>
+  <section class="work" id="work" aria-labelledby="work-h">
+    <h2 class="sr" id="work-h">만든 것</h2>
+    <article class="panel"><img src="gauges.jpg" width="1800" height="1350" alt="1949년, 계기판 숫자를 받아 적는 사람들" loading="lazy">
+      <div class="row"><span class="yr">2026</span><h3 class="t">실시간 시세 알림</h3><span class="fact">휴대폰으로 바로</span></div></article>
+    <article class="panel"><img src="records.jpg" width="1800" height="1830" alt="1940년대, 음반을 걸어 방송을 내보내는 사람" loading="lazy" style="object-position:40% 45%">
+      <div class="row"><span class="yr">2026</span><h3 class="t">영상 자동 제작과 예약 올리기</h3><span class="fact">자료부터 발행까지</span></div></article>
+    <article class="panel"><img src="typing.jpg" width="1280" height="1146" alt="1918년, 타자기 앞에 줄지어 앉은 사무실" loading="lazy" style="object-position:50% 70%">
+      <div class="row"><span class="yr">2026</span><h3 class="t">거래·세금계산서 관리</h3><span class="fact">실제 회사에서 사용</span></div></article>
+    <article class="panel"><img src="radioplay.jpg" width="1800" height="1130" alt="라디오 방송국에서 마이크 앞에 선 출연자들" loading="lazy">
+      <div class="row"><span class="yr">2026</span><h3 class="t">방송 화면과 진행자</h3><span class="fact">라이브 방송</span></div></article>
+    <article class="panel"><img src="postoffice.jpg" width="1800" height="1308" alt="1914년, 우체국에서 편지를 나누는 사람들" loading="lazy" style="object-position:60% 40%">
+      <div class="row"><span class="yr">2026</span><h3 class="t">회원제 휴대폰 앱</h3><span class="fact">설치 없이 홈 화면</span></div></article>
   </section>
 
-  <footer class="foot">
-    <a href="privacy.html">개인정보처리방침 · Privacy Policy</a>
-    <a href="terms.html">이용 약관 · Terms of Service</a>
-    <span>문의 · Contact: <a href="mailto:gyominseo4@gmail.com">gyominseo4@gmail.com</a></span>
-  </footer>
+  <section class="about" id="about" aria-labelledby="about-h">
+    <h2 class="sr" id="about-h">만드는 사람</h2>
+    <div class="ab-row">
+      <dl class="facts" data-reveal>
+        <div><dt>이름</dt><dd>서교민</dd></div>
+        <div><dt>브랜드</dt><dd>파밍 · MINJINE</dd></div>
+        <div><dt>카카오톡 아이디</dt><dd>mins8282</dd></div>
+      </dl>
+      <p class="lead" data-reveal style="--d:90ms">프로그램을 처음부터 끝까지 혼자 설계하고 만듭니다. 제가 쓰려고 만든 프로그램을 매일 돌리며 다듬어 왔고, 물어보시면 만든 사람이 직접 답합니다.</p>
+    </div>
+    <div class="ab-row two">
+      <p class="word" data-reveal>채널</p>
+      <div class="lists" data-reveal style="--d:90ms">
+        <ul>
+          <li><a href="https://www.youtube.com/@%EC%BD%94%EC%9D%B8%ED%8C%8C%EB%B0%8D" target="_blank" rel="noopener">코인 파밍</a><span>유튜브</span></li>
+          <li><a href="https://tt10119.tistory.com/" target="_blank" rel="noopener">개발 이야기</a><span>블로그</span></li>
+          <li><a href="https://mingogogo.tistory.com/" target="_blank" rel="noopener">코인 이야기</a><span>블로그</span></li>
+        </ul>
+        <ul>
+          <li><a href="https://www.instagram.com/coin.ming" target="_blank" rel="noopener">coin.ming</a><span>인스타그램</span></li>
+          <li><a href="https://www.threads.net/@minjinehot" target="_blank" rel="noopener">@minjinehot</a><span>스레드</span></li>
+          <li><a href="https://www.tiktok.com/@jjinbbin" target="_blank" rel="noopener">@jjinbbin</a><span>틱톡</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-h">
+    <h2 class="sr" id="how-h">일하는 순서</h2>
+    <div class="step"><img class="media" src="exchange.jpg" width="1690" height="1296" alt="1929년, 교환대 앞에서 전화를 이어 주는 교환원들" loading="lazy">
+      <div class="verbwrap"><h3 class="verb">묻고</h3></div>
+      <p class="say">하고 싶은 일을 카카오톡으로 한 줄 보내 주세요. 정리된 문서가 없어도 됩니다.</p></div>
+    <div class="step"><img class="media" src="computers.jpg" width="1150" height="900" alt="1949년, 계산실에서 손으로 계산하는 사람들" loading="lazy">
+      <div class="verbwrap"><h3 class="verb">정하고</h3></div>
+      <p class="say">될지 안 될지, 어떻게 만들지, 언제까지 할지 먼저 말씀드립니다.</p></div>
+    <div class="step"><video class="media" autoplay muted loop playsinline preload="metadata" poster="machines-poster.jpg" width="960" height="720" aria-hidden="true"><source src="machines.mp4" type="video/mp4"></video>
+      <div class="verbwrap"><h3 class="verb">만들고</h3></div>
+      <p class="say">만드는 동안 중간 결과를 보여 드리고, 실제로 쓰실 컴퓨터에서 시험합니다.</p></div>
+    <div class="step"><img class="media" src="mailroom.jpg" width="1800" height="1450" alt="1920년, 우체국 우편 분류실" loading="lazy">
+      <div class="verbwrap"><h3 class="verb">건넵니다</h3></div>
+      <p class="say">쓰는 법과 함께 건네 드립니다. 쓰다가 막히면 다시 물어보세요.</p></div>
+  </section>
+
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <img src="exchange.jpg" width="1690" height="1296" alt="1929년, 교환대 앞에 줄지어 앉은 교환원들" loading="lazy">
+    <div class="card">
+      <h2 id="contact-h" data-reveal>제작 문의</h2>
+      <p data-reveal style="--d:70ms">하고 싶은 일을 한 줄로 적어 보내 주세요. 만든 사람이 직접 답합니다.</p>
+      <dl class="ways" data-reveal style="--d:140ms">
+        <div><dt>오픈채팅</dt><dd><a href="https://open.kakao.com/o/pokOdmFi" target="_blank" rel="noopener">카카오톡 오픈채팅방</a></dd></div>
+        <div><dt>카카오톡 아이디</dt><dd>mins8282 <button type="button" class="mini" id="copyId">복사</button></dd></div>
+      </dl>
+      <label class="askl" for="ask">무엇이 궁금하세요?</label>
+      <div class="chips" role="group" aria-label="자주 묻는 일 고르기">
+        <button type="button" class="mini" aria-pressed="false" data-t="매일 엑셀 파일을 합쳐 정리하는 일을 자동으로 하고 싶어요.">엑셀 정리</button>
+        <button type="button" class="mini" aria-pressed="false" data-t="정해 둔 조건이 되면 휴대폰으로 알림을 받고 싶어요.">시세 알림</button>
+        <button type="button" class="mini" aria-pressed="false" data-t="영상 만들기와 올리기를 자동으로 하고 싶어요.">영상 올리기</button>
+        <button type="button" class="mini" aria-pressed="false" data-t="거래처 장부와 세금계산서를 한곳에서 관리하고 싶어요.">장부 관리</button>
+        <button type="button" class="mini" aria-pressed="false" data-t="휴대폰에서 쓰는 회원용 앱을 만들고 싶어요.">앱 만들기</button>
+      </div>
+      <textarea id="ask" name="ask" rows="4" placeholder="예: 매일 엑셀 세 개를 합쳐 보고서를 만들어요. 자동으로 될까요?"></textarea>
+      <p class="note" id="note" aria-live="polite">보내기를 누르면 적은 글이 복사되고 카카오톡 오픈채팅이 열려요.</p>
+      <a class="btn big" id="send" href="https://open.kakao.com/o/pokOdmFi" target="_blank" rel="noopener">복사하고 카톡으로 보내기</a>
+    </div>
+  </section>
 </main>
+
+<footer class="foot">
+  <div class="fphoto"><img src="typing.jpg" width="1280" height="1146" alt="1918년, 타자기 앞에서 일하는 사람들" loading="lazy"></div>
+  <div class="fside">
+    <a class="mark" href="#top">파밍 · MINJINE</a>
+    <nav class="fmenu" aria-label="아래 메뉴">
+      <a href="#faq">질문</a><a href="#work">만든 것</a><a href="#about">소개</a><a href="#how">진행</a><a href="#contact">문의</a>
+    </nav>
+    <div class="fblocks">
+      <p>제작 문의: <a href="https://open.kakao.com/o/pokOdmFi" target="_blank" rel="noopener">카카오톡 오픈채팅</a> · 아이디 mins8282</p>
+      <p>채널: <a href="https://www.youtube.com/@%EC%BD%94%EC%9D%B8%ED%8C%8C%EB%B0%8D" target="_blank" rel="noopener">유튜브 코인 파밍</a> · <a href="https://tt10119.tistory.com/" target="_blank" rel="noopener">개발 블로그</a></p>
+    </div>
+    <div class="uploader">
+      <p><b>Coin Farming Uploader</b>는 이 사이트 운영자가 자기 유튜브 채널 '코인 파밍'에 영상을 예약해 올리는 PC 프로그램입니다. 구글 로그인 정보와 채널 정보는 운영자 PC에만 저장됩니다.</p>
+      <p lang="en">Coin Farming Uploader is a desktop tool the owner of this site uses to schedule uploads to their own YouTube channel. Sign-in data stays on the owner's PC.</p>
+      <p><a href="uploader.html">프로그램 소개</a> · <a href="privacy.html">개인정보처리방침 Privacy Policy</a> · <a href="terms.html">이용 약관 Terms</a> · <a href="mailto:gyominseo4@gmail.com">gyominseo4@gmail.com</a></p>
+    </div>
+    <div class="legal">
+      <p>© 2026 파밍 · MINJINE · 서교민 · 사업자등록번호 507-05-99353</p>
+      <details class="credits"><summary>사진·영상 출처</summary>
+        <ul>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Telephone_Exchange(GN06737).jpg" target="_blank" rel="noopener">Telephone Exchange</a>, State Government Photographer, CC0, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:NH_52909_-_typing_pool,_Navy_Department,_Washington_DC.jpg" target="_blank" rel="noopener">Typing pool, Navy Department, Washington DC (1918)</a>, 퍼블릭 도메인, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Broadcasting_records_over_the_radio,_1940s.jpg" target="_blank" rel="noopener">Broadcasting records over the radio, 1940s</a>, Yle Archives, 퍼블릭 도메인, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Broadcasting_a_radio_play_at_NBC_studio.jpg" target="_blank" rel="noopener">Broadcasting a radio play at NBC studio</a>, 퍼블릭 도메인, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:NACA_Computers_Take_Readings_From_Manometer_Boards_(GRC-1949-C-23011).jpg" target="_blank" rel="noopener">NACA Computers Take Readings From Manometer Boards (1949)</a>, NASA Glenn Research Center, 퍼블릭 도메인, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:N._Y._Post_Office_-_assorting_(i.e.,_sorting)_mail_LCCN2014697413.jpg" target="_blank" rel="noopener">N. Y. Post Office, sorting mail (1914)</a>, Bain News Service, 퍼블릭 도메인, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Mail_sorting_room,_U.S._Post_Office,_Washington,_D.C.)_-_National_Photo_Co.,_Washington,_D.C_LCCN90709842.jpg" target="_blank" rel="noopener">Mail sorting room, U.S. Post Office (1920)</a>, National Photo Company Collection, 퍼블릭 도메인, Wikimedia Commons</li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Human_computers_-_Dryden.jpg" target="_blank" rel="noopener">Human computers, Dryden (1949)</a>, NACA (NASA), 퍼블릭 도메인, Wikimedia Commons</li>
+          <li>영상: <a href="https://commons.wikimedia.org/wiki/File:ARNHEM_KAN_WEER_AUTOMATISCH_TELEFONEREN-PGM4011942.webm" target="_blank" rel="noopener">Arnhem kan weer automatisch telefoneren (1947)</a>, Polygoon Hollands Nieuws / Beeld en Geluid, 퍼블릭 도메인, Wikimedia Commons</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* 첫 화면 필름: 스크롤만큼 한 칸씩 올라감 (스크롤을 빼앗지 않음) · 들어오는 움직임 · 질문 복사해 카톡으로 */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var hero = document.querySelector('.hero'), win = document.querySelector('.reel'), track = document.querySelector('.track');
+  var figs = track ? track.querySelectorAll('figure') : [];
+  function centre(i) { var f = figs[i], im = f.querySelector('img'); return f.offsetTop + im.offsetHeight / 2; }
+  var wide = window.matchMedia ? window.matchMedia('(min-width: 1001px)') : { matches: true };
+  function place() {
+    if (!figs.length) return;
+    if (!wide.matches) { track.style.transform = ''; return; }
+    var room = hero.offsetHeight - window.innerHeight, top = hero.getBoundingClientRect().top;
+    var p = room > 0 ? Math.min(1, Math.max(0, -top / room)) : 0;
+    var x = p * (figs.length - 1), i = Math.min(figs.length - 1, Math.floor(x)), f = x - i;
+    var c = i < figs.length - 1 ? centre(i) + (centre(i + 1) - centre(i)) * f : centre(i);
+    track.style.transform = 'translate3d(0,' + (win.clientHeight / 2 - c).toFixed(1) + 'px,0)';
+  }
+  var ticking = false;
+  function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; place(); }); }
+  place();
+  window.addEventListener('resize', onScroll);
+  if (wide.addEventListener) wide.addEventListener('change', place);
+  if (!reduce) window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('load', place);
+
+  var reveal = document.querySelectorAll('[data-reveal], .panel');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    reveal.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () { setTimeout(function () {
+      reveal.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) el.classList.add('is-in'); });
+    }, 2500); });
+  } else reveal.forEach(function (el) { el.classList.add('is-in'); });
+
+  if (reduce) document.querySelectorAll('video').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  var ask = document.getElementById('ask'), note = document.getElementById('note');
+  function copy(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(function () { return old(text); });
+    return Promise.resolve(old(text));
+  }
+  function old(text) {
+    var t = document.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; } document.body.removeChild(t); return ok;
+  }
+  document.querySelectorAll('.chips button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.getAttribute('data-t'), cur = ask.value.trim();
+      if (cur.indexOf(t) < 0) ask.value = cur ? cur + '\n' + t : t;
+      b.setAttribute('aria-pressed', 'true');
+      ask.focus();
+    });
+  });
+  document.getElementById('send').addEventListener('click', function () {
+    var t = ask.value.trim();
+    if (t) { copy('[홈페이지 문의]\n' + t); note.textContent = '복사했어요. 열린 카카오톡 오픈채팅에 붙여 넣어 보내 주세요.'; }
+    else note.textContent = '카카오톡 오픈채팅을 열었어요. 하고 싶은 일을 한 줄로 보내 주세요.';
+  });
+  document.getElementById('copyId').addEventListener('click', function () {
+    copy('mins8282'); note.textContent = '아이디 mins8282 를 복사했어요. 카카오톡 친구 추가에서 아이디로 찾아 주세요.';
+  });
+})();
+</script>
 </body>
 </html>
