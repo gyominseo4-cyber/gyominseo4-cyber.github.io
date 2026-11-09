@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /uploader.html
+
+Sitemap: https://gyominseo4-cyber.github.io/sitemap.xml
