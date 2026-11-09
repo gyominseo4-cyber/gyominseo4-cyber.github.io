@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MINJINE 사무 자동화</title>
+<meta name="description" content="사무 자동화부터 선물 자동매매, 유튜브 영상 자동화, 채팅방 자동화까지. 손으로 반복하던 일을 MINJINE이 프로그램으로 바꿔 드립니다.">
+<meta property="og:title" content="MINJINE — 반복 업무는 MINJINE이 합니다">
+<meta property="og:description" content="장부·주문·메일·영상·자동매매. 회사마다 맞춘 자동화 프로그램.">
+<meta property="og:image" content="https://gyominseo4-cyber.github.io/og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+<style>
+/* MINJINE 사무 자동화. 어두운 첫 화면에 홍보영상(만들기 전까지는 실제 화면 넘김), 반복 업무 비용 계산기, 밝은 카드판.
+   3D 아이콘은 Microsoft Fluent Emoji 3D (MIT). 그림은 모두 실제 프로그램 화면. */
+:root{
+  --dark:#14120f; --dark2:#1f1b17; --dark3:#2a251f; --on-dark:#f5f2ec; --on-dark2:#a59d90;
+  --bg:#f2eee6; --card:#fffdf9; --card2:#f5f1e9; --ink:#1a1714; --muted:#5f584e;
+  --g:#ff5a1f; --g2:#f04e14; --g3:#c2410c; --gbg:#fde9df; --kakao:#fee500;
+  --f:"Wanted Sans Variable","Wanted Sans","Malgun Gothic",sans-serif;
+  --lift:0 1px 0 rgba(255,255,255,.9) inset,0 1px 2px rgba(20,30,25,.06),0 14px 30px -16px rgba(20,30,25,.28);
+  --r:22px; --m:clamp(18px,3vw,48px); --max:1360px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{overflow-x:clip;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;word-break:keep-all}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--g);outline-offset:3px}
+.in{max-width:var(--max);margin:0 auto;padding:0 var(--m)}
+.i3{width:1em;height:1em;display:inline-block;vertical-align:-.12em}
+
+/* 단추 */
+.btn{display:inline-flex;align-items:center;gap:10px;height:58px;padding:0 28px;border-radius:16px;font:inherit;font-size:18px;font-weight:750;text-decoration:none;cursor:pointer;border:0;
+  background:var(--g2);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 4px 0 var(--g3),0 10px 24px -8px rgba(22,163,74,.55);transition:transform .1s,box-shadow .1s}
+.btn:hover{background:#ff6a33}
+.btn.kk{background:var(--kakao);color:#191600;box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 4px 0 #c9b600,0 10px 24px -10px rgba(200,180,0,.5)}
+.btn.kk:hover{background:#ffeb3b}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--g3)}
+.btn.ghost{background:transparent;color:var(--on-dark);box-shadow:inset 0 0 0 2px #4a433a}
+.btn.ghost:hover{background:#221e19}
+.btn .ic{width:22px;height:22px}
+
+/* 위 줄 */
+.top{position:absolute;inset:0 0 auto 0;z-index:5}
+.top .in{display:flex;align-items:center;gap:28px;height:78px}
+.wm{font-size:24px;font-weight:850;letter-spacing:.02em;color:var(--on-dark);text-decoration:none}
+.wm b{color:var(--g)}
+.top nav{margin-left:auto;display:flex;gap:26px}
+.top nav a{color:var(--on-dark2);text-decoration:none;font-size:16px;font-weight:600}
+.top nav a:hover{color:#fff}
+.top .btn{height:44px;font-size:16px;padding:0 18px;border-radius:12px}
+
+/* 첫 화면 */
+.hero{background:var(--dark);color:var(--on-dark);position:relative;overflow:hidden;padding:150px 0 0}
+.hero .in{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(46px,6vw,96px);font-weight:850;letter-spacing:-.045em;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--g)}
+.hero .sub{font-size:clamp(18px,1.4vw,22px);color:var(--on-dark2);margin:26px 0 34px;max-width:30em}
+.hero .sub b{color:var(--on-dark);font-weight:650}
+.hero .acts{display:flex;gap:14px;flex-wrap:wrap}
+.hero .trust{display:flex;gap:28px;flex-wrap:wrap;margin-top:40px;color:var(--on-dark2);font-size:15px}
+.hero .trust b{display:block;color:var(--on-dark);font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.stage{position:relative;height:560px}
+.shot{position:absolute;right:-6%;top:20px;width:112%;border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);transform:perspective(1600px) rotateY(-14deg) rotateX(4deg);transform-origin:left center}
+.shot img{width:100%}
+.chip{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 20px 40px -18px rgba(0,0,0,.6);font-size:15px;font-weight:650;white-space:nowrap}
+.chip img{width:38px;height:38px}
+.chip small{display:block;color:var(--muted);font-weight:500;font-size:13px}
+.chip .dot{width:9px;height:9px;border-radius:50%;background:var(--g);box-shadow:0 0 0 4px var(--gbg)}
+.c1{left:-4%;top:40px}.c2{left:6%;bottom:70px}.c3{right:2%;bottom:20px}
+.marq{position:relative;z-index:3;background:var(--dark);margin-top:70px;border-top:1px solid #2a251f;overflow:hidden;white-space:nowrap;padding:22px 0;color:#7f9189;font-size:20px;font-weight:650}
+.marq .track{display:inline-flex;gap:46px;animation:mq 40s linear infinite;padding-left:46px}
+.marq span{display:inline-flex;align-items:center;gap:10px}
+.marq .ic{width:22px;height:22px;color:var(--g)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* 공통 구역 */
+section{padding:clamp(90px,10vw,150px) 0 0}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:44px;flex-wrap:wrap}
+.sh h2{font-size:clamp(34px,3.8vw,58px);font-weight:820;letter-spacing:-.04em;line-height:1.08;max-width:15em}
+.sh h2 .ic{width:.82em;height:.82em;vertical-align:-.06em;margin-right:.22em;color:var(--g)}
+.sh p{color:var(--muted);max-width:28em;font-size:19px}
+
+/* 계산기 (훅) */
+.calc{display:grid;grid-template-columns:1fr 1.1fr;gap:20px}
+.calc .box{background:var(--card);border-radius:var(--r);box-shadow:var(--lift);padding:clamp(24px,3vw,44px)}
+.calc label{display:block;font-weight:700;font-size:17px;margin-bottom:8px}
+.calc .row{margin-bottom:28px}
+.calc .val{float:right;color:var(--g3);font-weight:800}
+.calc input[type=range]{width:100%;accent-color:var(--g2);height:28px}
+.calc .res{background:var(--dark);color:var(--on-dark)}
+.calc .res .big{font-size:clamp(46px,5.4vw,84px);font-weight:850;letter-spacing:-.04em;line-height:1;color:var(--g)}
+.calc .res .lab{color:var(--on-dark2);font-size:17px;margin:6px 0 30px}
+.calc .res .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid #2f2922;padding-top:26px}
+.calc .res .two b{display:block;font-size:clamp(28px,2.6vw,40px);font-weight:800;letter-spacing:-.03em}
+.calc .res .two span{color:var(--on-dark2);font-size:15px}
+.calc .res .say{margin-top:28px;font-size:19px}
+.calc .res .say a{color:var(--g);font-weight:700}
+.calc .note{color:var(--muted);font-size:14px;margin-top:6px}
+
+/* 두 갈래 */
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.trk{border-radius:28px;padding:clamp(26px,3vw,44px);box-shadow:var(--lift)}
+.trk.light{background:var(--card)}
+.trk.dark{background:var(--dark);color:var(--on-dark)}
+.trk h3{font-size:clamp(28px,2.6vw,40px);font-weight:820;letter-spacing:-.035em;display:flex;align-items:center;gap:12px}
+.trk h3 .ic{width:40px;height:40px;color:var(--g)}
+.trk>p{color:var(--muted);margin:10px 0 24px}
+.trk.dark>p{color:var(--on-dark2)}
+.it{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start;padding:16px;border-radius:16px;margin-bottom:8px;background:var(--card2)}
+.trk.dark .it{background:var(--dark2)}
+.it .ic{width:34px;height:34px;margin:6px;color:var(--g3)}
+.trk.dark .it .ic{color:var(--g)}
+.it b{font-size:19px;font-weight:750;display:block;letter-spacing:-.01em}
+.it span{font-size:16px;color:var(--muted)}
+.trk.dark .it span{color:var(--on-dark2)}
+.it .real{display:inline-block;margin-left:6px;font-size:13px;font-weight:700;color:var(--g3);background:var(--gbg);padding:2px 8px;border-radius:99px;vertical-align:2px}
+.trk.dark .it .real{background:#3a2216;color:#ffb08f}
+.legal{margin-top:16px;font-size:14px;color:var(--on-dark2)}
+
+/* 실제 화면 (살아 있는 것 2) */
+.gal{display:grid;grid-template-columns:330px 1fr;gap:20px}
+.gal .tabs{display:flex;flex-direction:column;gap:8px}
+.gal .tabs button{display:flex;align-items:center;gap:14px;text-align:left;font:inherit;font-size:18px;font-weight:700;padding:14px 16px;border-radius:16px;border:0;background:transparent;color:var(--muted);cursor:pointer;transition:background .15s,color .15s}
+.gal .tabs button img{width:36px;height:36px}
+.gal .tabs button small{display:block;font-weight:500;font-size:14px;color:var(--muted)}
+.gal .tabs button:hover{background:#e7e4dd;color:var(--ink)}
+.gal .tabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:var(--lift)}
+.gal .view{background:var(--card);border-radius:28px;box-shadow:var(--lift);padding:14px;min-height:520px;display:flex;flex-direction:column}
+.gal .view .frame{flex:1;border-radius:18px;overflow:hidden;background:var(--card2);display:flex;align-items:center;justify-content:center}
+.gal .view img{width:100%;height:100%;max-height:560px;object-fit:contain}
+.gal .view p{padding:18px 10px 6px;font-size:18px}
+.gal .view p b{font-weight:750}
+
+/* 업종 고르기 */
+.pick{display:grid;grid-template-columns:1fr 1.6fr;gap:20px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start}
+.chips button{font:inherit;font-size:17px;font-weight:700;padding:12px 18px;border-radius:14px;border:0;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.06),0 3px 0 #ddd8cf;cursor:pointer;display:flex;align-items:center;gap:8px}
+.chips button .ic{width:20px;height:20px}
+.chips button[aria-selected=true]{background:var(--dark);color:#fff;box-shadow:0 3px 0 #000}
+.pout{background:var(--card);border-radius:var(--r);box-shadow:var(--lift);padding:clamp(24px,3vw,40px)}
+.pout h3{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.pout .made{color:var(--g3);font-weight:700;margin-bottom:18px}
+.pout ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pout li{background:var(--card2);border-radius:14px;padding:14px 16px;font-weight:600}
+.pout li span{display:block;color:var(--muted);font-weight:500;font-size:14px}
+
+/* 진행 */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.st{background:var(--card);border-radius:var(--r);box-shadow:var(--lift);padding:28px}
+.st .ic{width:40px;height:40px;margin-bottom:16px;display:block;color:var(--g3)}
+.st b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.st em{font-style:normal;color:var(--g3);font-weight:700;font-size:15px}
+.st p{color:var(--muted);margin-top:8px;font-size:16px}
+
+/* 묻고 답하기 */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.faq details{background:var(--card);border-radius:18px;box-shadow:var(--lift);padding:20px 24px}
+.faq summary{cursor:pointer;font-weight:750;font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--g2);font-weight:800}
+.faq details[open] summary::after{content:"−"}
+.faq p{color:var(--muted);margin-top:10px;font-size:17px}
+
+/* 마지막 */
+.cta{margin-top:clamp(90px,10vw,150px);background:var(--dark);color:var(--on-dark);padding:clamp(70px,8vw,120px) 0 40px}
+.cta h2{font-size:clamp(40px,5.4vw,84px);font-weight:850;letter-spacing:-.045em;line-height:1.05;max-width:12em}
+.cta h2 em{font-style:normal;color:var(--g)}
+.cta p{color:var(--on-dark2);font-size:20px;margin:22px 0 34px}
+.cta .acts{display:flex;gap:14px;flex-wrap:wrap}
+.cta .mail{display:inline-block;margin-top:46px;font-size:clamp(24px,2.6vw,40px);font-weight:750;color:var(--on-dark);text-decoration:none;border-bottom:3px solid var(--g)}
+footer{background:var(--dark);color:#857c70;font-size:14px;padding:60px 0 0;overflow:hidden}
+footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #2a251f;padding-top:24px}
+footer a{color:#a59d90}
+footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.8;color:#211d18;margin-top:30px;white-space:nowrap;transform:translateY(16%)}
+
+
+.dialbox{position:relative;max-width:560px;margin-left:auto;width:100%}
+#dial{width:100%;height:auto;display:block}
+.dialmid{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);text-align:center;width:54%}
+.dialmid small{color:var(--on-dark2);font-size:14px}
+.dialmid b{display:block;font-size:clamp(44px,4.6vw,70px);font-weight:850;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.dialmid span{display:block;margin-top:10px;font-size:15px;color:var(--on-dark2);line-height:1.45}
+.dialmid span b{display:inline;font-size:15px;color:var(--g);font-weight:750;letter-spacing:0}
+.dkey{list-style:none;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px;font-size:14px;color:var(--on-dark2)}
+.dkey i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.k1{background:var(--g)}.k2{background:#f5c542}.k3{background:#f5f2ec}
+@media (max-width:1000px){.dialbox{margin:10px auto 0}}
+.bento{display:grid;grid-template-columns:1.35fr 1fr;gap:18px}
+.bento figure{background:var(--card);border-radius:24px;box-shadow:var(--lift);padding:12px;display:flex;flex-direction:column}
+.bento img{border-radius:16px;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left top}
+.bento figcaption{padding:14px 8px 4px;font-size:16px;color:var(--muted)}
+.bento figcaption b{color:var(--ink);font-weight:750;margin-right:6px}
+.b1{grid-row:span 2}.b1 img{aspect-ratio:auto;flex:1}
+.led{border-radius:16px;background:#fff;border:1px solid #e6e0d4;padding:18px;font-size:15px;aspect-ratio:16/10;display:flex;flex-direction:column}
+.led .lh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.led .lh b{font-size:19px}.led .lh span{color:var(--muted);font-size:13px}
+.led table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.led th{text-align:left;font-size:13px;color:var(--muted);font-weight:600;padding:6px 8px;border-bottom:1px solid #eee7da}
+.led td{padding:9px 8px;border-bottom:1px solid #f3eee4}
+.led td:nth-child(2),.led td:nth-child(3),.led th:nth-child(2),.led th:nth-child(3){text-align:right}
+.led .due{color:#c2410c;font-weight:700}
+.led i{font-style:normal;font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px}
+.led .ok{background:#e7f3ea;color:#25663a}.led .no{background:#fde9df;color:#c2410c}
+.led .lf{margin-top:auto;text-align:right;font-size:15px;color:var(--muted)}
+.led .lf b{color:var(--ink);font-size:20px;margin-left:6px}
+@media (max-width:1000px){.bento{grid-template-columns:1fr}.b1{grid-row:auto}}
+
+.reel{margin:0;width:100%}
+.reel .scr{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 40px 80px -36px rgba(0,0,0,.9)}
+.reel .scr img,.reel .scr video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top;opacity:0;transition:opacity .8s}
+.reel .scr img.on,.reel .scr video{opacity:1}
+.reel figcaption{margin-top:14px;color:var(--on-dark2);font-size:15px}
+
+.promo{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:20px;align-items:start;justify-self:end;width:100%;max-width:620px}
+.phone{margin:0;position:relative;aspect-ratio:9/16;border-radius:26px;overflow:hidden;background:#000;box-shadow:0 0 0 8px #24201b,0 40px 80px -30px rgba(0,0,0,.9)}
+.phone iframe{width:100%;height:100%;border:0;display:block}
+.snd{position:absolute;right:12px;bottom:12px;font:inherit;font-size:14px;font-weight:700;border:0;border-radius:99px;padding:8px 14px;background:rgba(20,18,15,.78);color:#fff;cursor:pointer}
+.snd[aria-pressed=true]{background:var(--g);color:#fff}
+.side{display:flex;flex-direction:column;gap:12px}
+.side .made-by{font-size:15px;color:var(--on-dark2);line-height:1.5}
+.side .ytl{color:var(--g);font-weight:700;text-decoration:none;white-space:nowrap}
+.side .made-by b{display:block;color:var(--on-dark);font-size:17px;margin-bottom:4px}
+.side figure{margin:0;background:#1f1b17;border-radius:14px;padding:6px}
+.side img{border-radius:10px;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:left top}
+.side figcaption{font-size:13px;color:var(--on-dark2);padding:6px 4px 2px}
+@media (max-width:1000px){.promo{justify-self:stretch;max-width:none;grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.promo{grid-template-columns:1fr}.phone{max-width:320px;margin:0 auto}.side{display:none}}
+/* 등장 */
+@media (prefers-reduced-motion:no-preference){
+  .js [data-in]{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+  .js [data-in].on{opacity:1;transform:none}
+  .chip{animation:fl 6s ease-in-out infinite}
+  .c2{animation-delay:-2s}.c3{animation-delay:-4s}
+  @keyframes fl{50%{transform:translateY(-10px)}}
+  .gal .view img{transition:opacity .25s}
+}
+@media (prefers-reduced-motion:reduce){.marq .track{animation:none}}
+
+/* 좁은 화면 */
+@media (max-width:1000px){
+  .hero .in,.calc,.tracks,.gal,.pick,.faq{grid-template-columns:1fr}
+  .stage{height:380px;margin-top:10px}
+  .shot{width:100%;right:0;transform:none}
+  .steps{grid-template-columns:1fr 1fr}
+  .gal .tabs{flex-direction:row;overflow-x:auto;padding-bottom:6px}
+  .gal .tabs button{flex:none}
+  .gal .tabs button small{display:none}
+  .top nav{display:none}
+}
+@media (max-width:600px){
+  .hero{padding-top:110px}
+  .stage{height:260px}
+  .chip{font-size:13px;padding:8px 12px}.chip img{width:28px;height:28px}
+  .c1{left:0;top:-10px}.c2{display:none}.c3{right:0;bottom:0}
+  .steps,.pout ul{grid-template-columns:1fr}
+  .calc .res .two{grid-template-columns:1fr}
+  .top .btn{display:none}
+}
+
+/* 아이콘: 이모지 대신 한 가지 선 아이콘(Lucide, ISC), 글자색으로 칠함 */
+.ic{display:inline-block;width:1em;height:1em;flex:none;background:currentColor;-webkit-mask:var(--u) center/contain no-repeat;mask:var(--u) center/contain no-repeat;vertical-align:-.12em}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="wm" href="index.html">MIN<b>JINE</b></a>
+  <nav aria-label="주 메뉴"><a href="coin.html">주식 · 암호화폐</a><a href="#calc">비용 계산기</a><a href="#what">할 수 있는 일</a><a href="#screens">실제 화면</a><a href="#steps">진행 순서</a></nav>
+  <a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener">무료 상담</a>
+</div></header>
+
+<main id="top">
+<div class="hero">
+  <div class="in">
+    <div>
+      <h1 data-in>사무 자동화로<br>업무 효율을<br><em>높이세요.</em></h1>
+      <p class="sub" data-in style="--d:90ms">장부 · 주문 · 영업 메일 같은 <b>사무 자동화</b>부터 <b>선물 자동매매</b>, <b>유튜브 영상 자동화</b>, <b>채팅방 자동화</b>까지. 반복 업무는 MINJINE 프로그램에 맡기고, 사람은 더 중요한 일에 집중하세요.</p>
+      <div class="acts" data-in style="--d:160ms">
+        <a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i>카톡으로 무료 상담</a>
+        <a class="btn ghost" href="#calc">반복 업무 비용 계산해 보기</a>
+      </div>
+      <div class="trust" data-in style="--d:220ms">
+        <div><b>13개</b>직접 만들어 돌리는 프로그램</div>
+        <div><b>24시간</b>자동매매 · 영상 · 채팅방</div>
+        <div><b>실사용</b>도매 회사 거래 장부</div>
+      </div>
+    </div>
+    <div class="promo" data-in style="--d:120ms">
+      <figure class="phone">
+        <iframe src="https://www.youtube-nocookie.com/embed/7UYgOTq___c?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=7UYgOTq___c&amp;playsinline=1&amp;rel=0" title="MINJINE 홍보영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </figure>
+      <div class="side">
+        <p class="made-by"><b>이 영상도 MINJINE 프로그램이 만들었습니다.</b> 대본만 넣으면 진행자 · 목소리 · 자막 · 화면까지 자동으로. <a class="ytl" href="https://youtu.be/7UYgOTq___c" target="_blank" rel="noopener">유튜브에서 보기 →</a></p>
+        <figure><img src="kwanje.jpg" alt="관제판 실제 화면" width="1900" height="1260"><figcaption>관제판</figcaption></figure>
+        <figure><img src="shots/yt_plan.jpg" alt="유튜브 자동화 기획표 실제 화면" width="1600" height="1000"><figcaption>영상 기획표</figcaption></figure>
+        <figure><img src="shots/ledger.png" alt="거래 장부 화면 예시" width="1200" height="760"><figcaption>거래 장부</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="marq" aria-hidden="true"><div class="track" id="marq"></div></div>
+</div>
+
+<section id="calc"><div class="in">
+  <div class="sh"><h2 data-in><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/timer.svg)" aria-hidden="true"></i>반복 업무에 1년 동안 얼마를 쓰고 있을까요?</h2><p data-in>막대를 움직여 보세요. 매일 반복하는 업무 시간이 1년이면 이만큼 쌓입니다.</p></div>
+  <div class="calc">
+    <div class="box" data-in>
+      <div class="row"><label for="ppl">반복 업무를 하는 사람 <span class="val" id="v-ppl"></span></label><input id="ppl" type="range" min="1" max="20" step="1" value="2"></div>
+      <div class="row"><label for="hrs">한 사람이 하루에 반복하는 시간 <span class="val" id="v-hrs"></span></label><input id="hrs" type="range" min="0.5" max="6" step="0.5" value="2"></div>
+      <div class="row"><label for="wage">시간당 인건비 <span class="val" id="v-wage"></span></label><input id="wage" type="range" min="10320" max="40000" step="500" value="15000"></div>
+      <p class="note">엑셀 옮겨 적기, 주문 모으기, 송장 입력, 장부 정리, 같은 메일 보내기 같은 일이 여기에 들어갑니다. 주 5일 · 1년 52주로 셉니다. 최저 시급은 2026년 10,320원입니다.</p>
+    </div>
+    <div class="box res" data-in style="--d:100ms" aria-live="polite">
+      <div class="big" id="r-won">—</div>
+      <div class="lab">1년 동안 반복 업무에 들어가는 인건비</div>
+      <div class="two">
+        <div><b id="r-hrs">—</b><span>1년 동안 손으로 하는 시간</span></div>
+        <div><b id="r-days">—</b><span>하루 8시간으로 치면 며칠</span></div>
+      </div>
+      <p class="say">이 중 프로그램이 대신할 수 있는 일이 얼마인지, <a href="https://open.kakao.com/me/paming" target="_blank" rel="noopener">카톡 한 줄로 물어보세요 →</a></p>
+    </div>
+  </div>
+</div></section>
+
+<section id="what"><div class="in">
+  <div class="sh"><h2 data-in>두 갈래로 자동화합니다</h2><p data-in>사무실의 반복 업무, 그리고 사람이 잠든 사이에도 돌아야 하는 일. 둘 다 직접 만들어 지금 돌리고 있습니다.</p></div>
+  <div class="tracks">
+    <div class="trk light" data-in>
+      <h3><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/briefcase.svg)" aria-hidden="true"></i>사무 자동화</h3>
+      <p>회사 양식과 엑셀은 그대로 두고, 반복되는 부분만 프로그램이 처리합니다.</p>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/book-open.svg)" aria-hidden="true"></i><div><b>거래 장부 <i class="real">실제 회사 사용</i></b><span>거래 입력, 미수금, 세금계산서 발행 현황을 한 화면에. 직원마다 전화번호로 로그인.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/mail.svg)" aria-hidden="true"></i><div><b>영업 메일 도우미</b><span>업체 주소만 넣으면 페이지를 읽고 그 업체 맞춤 제안 메일 초안까지.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/factory.svg)" aria-hidden="true"></i><div><b>공장 작업 관리</b><span>엑셀 · CSV 작업 파일을 올리면 공정 현황과 긴급 작업을 바로 보여 줍니다.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/receipt.svg)" aria-hidden="true"></i><div><b>고객관리 · 영수증 · 부품 식별표</b><span>작은 가게 고객 관리와 영수증, 공장 부품 카드 인쇄.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/calendar-days.svg)" aria-hidden="true"></i><div><b>시간표 메이커</b><span>학원 · 학교 시간표를 15가지 디자인으로 만들어 A4로 인쇄.</span></div></div>
+    </div>
+    <div class="trk dark" data-in style="--d:100ms">
+      <h3><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/zap.svg)" aria-hidden="true"></i>24시간 자동화</h3>
+      <p>실시간 자료를 받아 스스로 판단하고, 정한 시간에 알아서 움직입니다.</p>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/trending-up.svg)" aria-hidden="true"></i><div><b>선물 자동매매 제작</b><span>시세를 실시간으로 받아 시장 흐름을 10단계로 나누고, 규칙에 맞을 때만 주문. 진입 · 목표 · 손절 카드를 텔레그램으로, 매매일지로 결과 추적.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/clapperboard.svg)" aria-hidden="true"></i><div><b>유튜브 영상 자동화</b><span>자료 → 대본 → 장면 그림 → 목소리 · 자막 → 합성 → 예약 올리기. 채널 두 개를 하루 편성표대로.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i><div><b>채팅방 자동화</b><span>카톡 · 당근 채팅방에 정해진 시간마다 소식 카드, 질문엔 방장 말투로 답. 해외 뉴스는 번역해서.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/smartphone.svg)" aria-hidden="true"></i><div><b>텔레그램 원격 PC 제어</b><span>밖에서 휴대폰으로 회사 PC 프로그램을 켜고 끄고, 화면을 찍어 받아 봅니다.</span></div></div>
+      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/arrow-left-right.svg)" aria-hidden="true"></i><div><b>랜전송</b><span>같은 공유기의 PC 두 대를 서로의 탐색기처럼. 끌어다 놓으면 복사, 문서는 그 자리에서 고쳐 저장.</span></div></div>
+      <p class="legal">자동매매는 주문하신 규칙대로 움직이는 도구를 만드는 일입니다. 수익을 약속하거나 종목을 추천하지 않습니다.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="screens"><div class="in">
+  <div class="sh"><h2 data-in><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/monitor.svg)" aria-hidden="true"></i>말보다 실제 화면</h2><p data-in>지금 매일 쓰고 있는 프로그램 화면입니다.</p></div>
+  <div class="bento">
+    <figure class="b1" data-in><img src="kwanje.jpg" width="1900" height="1260" alt="MINJINE 관제판 실제 화면" loading="lazy"><figcaption><b>관제판</b> 프로그램 13개의 켜짐 · 꺼짐 · 문제를 한 화면에서 보고, 단추로 켜고 끕니다.</figcaption></figure>
+    <figure class="b2" data-in style="--d:80ms"><img src="ytauto.jpg" width="1440" height="900" alt="유튜브 자동화 대시보드 실제 화면" loading="lazy"><figcaption><b>유튜브 영상 자동화</b> 채널별 하루 편성, 만드는 중 · 올릴 준비 · 올림 · 문제를 한눈에.</figcaption></figure>
+    <figure class="b3" data-in style="--d:120ms"><div class="led" data-ui aria-label="거래 장부 화면 예시">
+      <div class="lh"><b>거래 장부</b><span>11월 · 거래처별</span></div>
+      <table><thead><tr><th>거래처</th><th>이번 달 거래</th><th>미수금</th><th>계산서</th></tr></thead>
+      <tbody><tr><td>한빛식자재</td><td>4,820,000</td><td class="due">1,200,000</td><td><i class="ok">발행</i></td></tr>
+      <tr><td>동부마트</td><td>2,310,000</td><td>0</td><td><i class="ok">발행</i></td></tr>
+      <tr><td>새솔유통</td><td>3,975,000</td><td class="due">975,000</td><td><i class="no">미발행</i></td></tr>
+      <tr><td>그린푸드</td><td>1,640,000</td><td>0</td><td><i class="ok">발행</i></td></tr></tbody></table>
+      <div class="lf">받을 돈 합계 <b>2,175,000원</b></div></div>
+      <figcaption><b>거래 장부</b> 도매 회사가 실제로 쓰는 장부의 화면 예시입니다. 거래처 이름과 금액은 예시입니다.</figcaption></figure>
+    <figure class="b5" data-in style="--d:160ms"><img src="shots/yt_plan.jpg" width="1600" height="1000" alt="유튜브 자동화 기획표 실제 화면" loading="lazy"><figcaption><b>영상 기획표</b> 오늘 올릴 영상 주제와 점수, 만들 순서를 프로그램이 정합니다.</figcaption></figure>
+    <figure class="b6" data-in style="--d:160ms"><img src="shots/yt_perf.jpg" width="1600" height="1000" alt="유튜브 자동화 성과 실제 화면" loading="lazy"><figcaption><b>올린 영상 성과</b> 조회수 · 시청 비율을 모아 다음 기획에 반영합니다.</figcaption></figure>
+    <figure class="b4" data-in style="--d:160ms"><img src="h14.jpg" width="800" height="500" alt="시간표 메이커 실제 화면" loading="lazy"><figcaption><b>시간표 메이커</b> 학원 · 학교 시간표를 15가지 디자인으로 만들어 A4로 인쇄.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="pick"><div class="in">
+  <div class="sh"><h2 data-in>우리 업종이면 뭘 자동화할 수 있을까요?</h2><p data-in>업종을 누르면 바로 자동화할 수 있는 일과, 이미 만들어 둔 프로그램이 나옵니다.</p></div>
+  <div class="pick">
+    <div class="chips" role="tablist" aria-label="업종" id="ptabs" data-in></div>
+    <div class="pout" id="pout" aria-live="polite" data-in style="--d:100ms"></div>
+  </div>
+</div></section>
+
+<section id="steps"><div class="in">
+  <div class="sh"><h2 data-in>카톡 한 줄이면 시작합니다</h2><p data-in>정리된 문서는 없어도 됩니다. 하고 싶은 일만 말씀해 주세요.</p></div>
+  <div class="steps">
+    <div class="st" data-in><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i><b>묻기</b><em>카톡 한 줄</em><p>자동화하고 싶은 업무를 한 줄로 적어 보내 주세요.</p></div>
+    <div class="st" data-in style="--d:80ms"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/file-text.svg)" aria-hidden="true"></i><b>정하기</b><em>하루 이틀</em><p>될지, 어떻게 만들지, 언제까지인지 먼저 말씀드립니다.</p></div>
+    <div class="st" data-in style="--d:160ms"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/wrench.svg)" aria-hidden="true"></i><b>만들기</b><em>보통 1~3주</em><p>중간 결과를 보여 드리고, 실제로 쓰실 PC에서 시험합니다.</p></div>
+    <div class="st" data-in style="--d:240ms"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/package-check.svg)" aria-hidden="true"></i><b>건네기</b><em>쓰는 법까지</em><p>설치하고 쓰는 법을 알려 드리고, 막히면 카톡으로.</p></div>
+  </div>
+</div></section>
+
+<section><div class="in">
+  <div class="sh"><h2 data-in>자주 묻는 것</h2></div>
+  <div class="faq" data-in>
+    <details><summary>비용은 얼마나 드나요?</summary><p>일마다 다릅니다. 하고 싶은 일을 들은 뒤, 될지 · 어떻게 만들지와 함께 먼저 말씀드립니다. 상담은 무료입니다.</p></details>
+    <details><summary>지금 쓰는 엑셀을 버려야 하나요?</summary><p>아니요. 지금 파일과 양식을 그대로 읽고, 결과도 엑셀로 내보내는 것이 기본입니다.</p></details>
+    <details><summary>어떤 PC에서 돌아가나요?</summary><p>회사에서 쓰는 윈도우 PC면 됩니다. 인터넷 없이 열리게 만들 수 있고, 자료는 회사 PC 안에 남습니다.</p></details>
+    <details><summary>자동매매도 만들어 주나요?</summary><p>네. 원하시는 규칙대로 시세를 받고 주문하고 기록하는 프로그램을 만듭니다. 수익을 약속하거나 종목을 추천하지는 않습니다.</p></details>
+    <details><summary>만든 뒤에 막히면요?</summary><p>카톡으로 말씀해 주세요. 쓰다가 바꾸고 싶은 점도 같이 듣습니다.</p></details>
+    <details><summary>회사 자료가 밖으로 나가지 않나요?</summary><p>자료는 회사 PC에 저장하는 것이 원칙입니다. 메일 · AI처럼 밖으로 보내야 하는 기능은 무엇이 어디로 가는지 미리 말씀드리고 정합니다.</p></details>
+  </div>
+</div></section>
+</main>
+
+<div class="cta"><div class="in">
+  <h2 data-in>반복되는 업무,<br><em>한 줄</em>만 적어 보내세요.</h2>
+  <p data-in>읽고 직접 답합니다. 될 일인지부터 솔직하게 말씀드립니다.</p>
+  <div class="acts" data-in><a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i>카톡으로 무료 상담</a></div>
+  <a class="mail" data-in href="mailto:miniming10119@gmail.com?subject=MINJINE%20%EC%9E%90%EB%8F%99%ED%99%94%20%EC%83%81%EB%8B%B4">miniming10119@gmail.com</a>
+</div></div>
+<footer><div class="in">
+  <div class="row"><span>MINJINE (상호 민지네) · 대표 서교민 · 응용 소프트웨어 개발 및 공급업 · 사업자등록번호 507-05-99353</span><span><a href="privacy.html">개인정보 처리방침</a> · <a href="terms.html">이용약관</a></span></div>
+  <p style="margin-top:10px">그림은 모두 MINJINE이 만든 프로그램의 실제 화면입니다. 3D 아이콘: Microsoft Fluent Emoji (MIT). 글꼴: Wanted Sans (SIL OFL 1.1).</p>
+  <div class="wmbig" aria-hidden="true">MINJINE</div>
+</div></footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var LM={"Speech balloon": "message-circle", "Chart increasing": "trending-up", "Briefcase": "briefcase", "Ledger": "book-open", "Envelope with arrow": "mail", "Factory": "factory", "Receipt": "receipt", "Spiral calendar": "calendar-days", "Rocket": "zap", "Clapper board": "clapperboard", "Mobile phone": "smartphone", "Outbox tray": "arrow-left-right", "Stopwatch": "timer", "Desktop computer": "monitor", "Memo": "file-text", "Hammer and wrench": "wrench", "Wrapped gift": "package-check", "Magnifying glass tilted left": "search", "Shopping bags": "shopping-bag", "Package": "package", "School": "graduation-cap", "Convenience store": "store"};function ic(n){return 'https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/'+LM[n]+'.svg';}
+  // 흐르는 줄
+  var names=[['거래 장부','Ledger'],['선물 자동매매','Chart increasing'],['유튜브 영상 자동화','Clapper board'],['영업 메일 도우미','Envelope with arrow'],['카톡 · 당근 채팅방 봇','Speech balloon'],['공장 작업 관리','Factory'],['텔레그램 원격 PC 제어','Mobile phone'],['랜전송','Outbox tray'],['급락 감지 스캐너','Magnifying glass tilted left'],['관제판','Desktop computer'],['시간표 메이커','Spiral calendar'],['고객관리 · 영수증','Receipt']];
+  var h=names.map(function(n){return '<span><i class="ic" style="--u:url('+ic(n[1])+')"></i>'+n[0]+'</span>'}).join('');
+  document.getElementById('marq').innerHTML=h+h;
+
+  // 계산기
+  function won(n){return Math.round(n).toLocaleString('ko-KR')+'원'}
+  function man(n){return n>=1e8?(n/1e8).toFixed(1).replace(/\.0$/,'')+'억 원':Math.round(n/1e4).toLocaleString('ko-KR')+'만 원'}
+  var ppl=document.getElementById('ppl'),hrs=document.getElementById('hrs'),wage=document.getElementById('wage');
+  function calc(){
+    var p=+ppl.value,hh=+hrs.value,w=+wage.value,year=p*hh*5*52,cost=year*w;
+    document.getElementById('v-ppl').textContent=p+'명';
+    document.getElementById('v-hrs').textContent=hh+'시간';
+    document.getElementById('v-wage').textContent=won(w);
+    document.getElementById('r-won').textContent=man(cost);
+    document.getElementById('r-hrs').textContent=year.toLocaleString('ko-KR')+'시간';
+    document.getElementById('r-days').textContent=Math.round(year/8).toLocaleString('ko-KR')+'일';
+  }
+  [ppl,hrs,wage].forEach(function(e){e.addEventListener('input',calc)}); calc();
+  // 업종
+  var P=[
+    ['쇼핑몰','Shopping bags','여러 판매처 주문을 한 표로','송장 번호 입력 · 출고 표','옵션별 재고표 맞추기','고객 문의 자동 답변','영업 메일 도우미 · 고객관리 · 채팅방 봇'],
+    ['유통 · 도매','Package','거래처별 장부','미수금 · 받을 돈 알림','세금계산서 발행 현황','월말 마감 엑셀','거래 장부 (실제 회사 사용 중)'],
+    ['제조 · 공장','Factory','작업 파일 → 공정 현황표','긴급 작업 골라 보기','부품 식별표 인쇄','생산 수량 집계','공장 작업 관리 · 부품 식별표'],
+    ['학원 · 교육','School','시간표 만들기 · 인쇄','강의 영상 자동 제작','학부모 알림','출결 · 수납 정리','시간표 메이커 · 강의 영상 자동 제작'],
+    ['작은 가게','Convenience store','단골 고객 관리','영수증 발행','카톡 문의 자동 답변','매출 · 지출 정리','고객관리 · 영수증 · 채팅방 봇'],
+    ['영상 · 홍보','Clapper board','자료 모으기 → 대본','장면 · 목소리 · 자막 · 합성','제목 · 설명 · 태그','예약 올리기 · 성과 보기','유튜브 영상 자동화'],
+    ['투자 · 매매','Chart increasing','시세 실시간 받기 · 저장','규칙대로 주문','매매일지 · 결과 추적','텔레그램 알림 · 휴대폰 스위치','선물 · 현물 자동매매 · 급락 감지 스캐너'],
+    ['커뮤니티 운영','Speech balloon','정해진 시간 소식 카드','질문 자동 답변','해외 뉴스 번역 카드','같은 글 두 번 안 올리기','카톡 · 당근 채팅방 봇']
+  ];
+  var pt=document.getElementById('ptabs'),po=document.getElementById('pout');
+  function pshow(i){var p=P[i];po.innerHTML='<h3>'+p[0]+'</h3><p class="made">이미 만든 것: '+p[6]+'</p><ul>'+p.slice(2,6).map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';[].forEach.call(pt.children,function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')})}
+  P.forEach(function(p,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML='<i class="ic" style="--u:url('+ic(p[1])+')"></i>'+p[0];b.addEventListener('click',function(){pshow(i)});pt.appendChild(b)});
+  pshow(0);
+  // 등장
+  var els=document.querySelectorAll('[data-in]');
+  if(!('IntersectionObserver' in window)){[].forEach.call(els,function(e){e.classList.add('on')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
+  [].forEach.call(els,function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
