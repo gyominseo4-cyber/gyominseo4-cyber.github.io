@@ -114,7 +114,7 @@ section{padding:clamp(90px,10vw,150px) 0 0}
 .it b{font-size:19px;font-weight:750;display:block;letter-spacing:-.01em}
 .it span{font-size:16px;color:var(--muted)}
 .trk.dark .it span{color:var(--on-dark2)}
-.it .real{display:inline-block;margin-left:6px;font-size:13px;font-weight:700;color:var(--g3);background:var(--gbg);padding:2px 8px;border-radius:99px;vertical-align:2px}
+.it .real{font-style:normal;display:inline-block;margin-left:6px;font-size:13px;font-weight:700;color:var(--g3);background:var(--gbg);padding:2px 8px;border-radius:99px;vertical-align:2px}
 .trk.dark .it .real{background:#3a2216;color:#ffb08f}
 .legal{margin-top:16px;font-size:14px;color:var(--on-dark2)}
 
@@ -230,6 +230,90 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 /* 폰에서 큰 그림이 칸을 밀어내지 않게 */
 .bento>*,.calc>*,.tracks>*,.gal>*,.pick>*,.faq>*,.steps>*,.hero .in>*,.promo>*{min-width:0}
 @media (max-width:600px){.hero .trust{gap:18px}.hero .trust>div{flex:1 1 40%}.sh h2{font-size:clamp(28px,8vw,40px)}}
+
+/* ── 카드 v2: 테두리 한 줄 + 옅은 그림자, 썸네일, 호버 때만 살짝 뜸 ── */
+:root{--line:#e7e0d3;--line-d:#2c2722;--card-sh:0 1px 2px rgba(26,23,20,.04),0 8px 24px -14px rgba(26,23,20,.18);--card-sh-h:0 2px 4px rgba(26,23,20,.05),0 18px 36px -16px rgba(26,23,20,.26)}
+.calc .box,.pout,.st,.faq details,.bento figure,.trk.light{box-shadow:var(--card-sh);border:1px solid var(--line)}
+.calc .res,.trk.dark{border:1px solid var(--line-d);box-shadow:0 20px 40px -24px rgba(0,0,0,.45)}
+.trk{border-radius:28px}
+.trk h3{gap:10px;align-items:baseline}
+.trk h3 small{font-size:15px;font-weight:700;color:var(--muted);letter-spacing:0}
+.trk.dark h3 small{color:var(--on-dark2)}
+.it{grid-template-columns:120px 1fr;gap:18px;align-items:center;padding:12px;border-radius:18px;background:transparent;border:1px solid var(--line);margin-bottom:10px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.trk.dark .it{background:#1c1915;border-color:var(--line-d)}
+.it:hover{transform:translateY(-2px);box-shadow:var(--card-sh-h);border-color:#dccfb9}
+.trk.dark .it:hover{border-color:#4a3f33;box-shadow:0 16px 30px -18px rgba(0,0,0,.7)}
+.it .th{width:120px;height:75px;border-radius:12px;object-fit:cover;object-position:left top;border:1px solid var(--line);background:#fff}
+.trk.dark .it .th{border-color:#332d26}
+.it b{font-size:18px}
+.it span{font-size:15px;line-height:1.5;display:block;margin-top:2px}
+.st{position:relative;padding:28px 26px 26px}
+.st .no{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--gbg);color:var(--g3);font-weight:850;font-size:18px;margin-bottom:18px}
+.st:hover,.faq details:hover,.bento figure:hover{box-shadow:var(--card-sh-h)}
+.st,.faq details,.bento figure{transition:box-shadow .2s}
+.chips button{box-shadow:none;border:1px solid var(--line);background:var(--card);font-weight:700;padding:11px 18px;border-radius:999px;transition:background .15s,border-color .15s}
+.chips button:hover{border-color:#cdbfa8}
+.chips button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:none}
+.pout li{background:var(--card2);border:1px solid #efe8dc}
+.marq span{gap:12px}
+.marq img{width:44px;height:28px;border-radius:6px;object-fit:cover;object-position:left top;opacity:.9}
+.kb{width:22px;height:22px;flex:none}
+.hero .trust>div{background:#1c1915;border:1px solid var(--line-d);border-radius:16px;padding:14px 18px;min-width:150px}
+.sh h2{letter-spacing:-.045em}
+.bento figure{border-radius:22px}
+@media (max-width:600px){.it{grid-template-columns:92px 1fr;gap:14px}.it .th{width:92px;height:58px}.hero .trust>div{min-width:0}}
+
+/* 엑셀 · CAD */
+.xc{display:grid;grid-template-columns:1.15fr 1fr;gap:20px}
+.xcard{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--card-sh);padding:clamp(22px,2.6vw,36px);display:flex;flex-direction:column;min-width:0}
+.xhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.xhead b{font-size:clamp(24px,2.2vw,32px);font-weight:820;letter-spacing:-.035em}
+.xhead span{color:var(--muted);font-size:15px;font-weight:600}
+.flow{display:grid;grid-template-columns:150px 28px 1fr;gap:10px;align-items:center}
+.files .xf{display:flex;flex-direction:column;gap:6px}
+.files i{font-style:normal;font-size:12.5px;font-weight:600;background:#eef6f0;color:#1d5f38;border:1px solid #d4e9da;border-radius:8px;padding:7px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.files p{font-size:13px;color:var(--muted);margin-top:8px}
+.arrow{font-size:24px;color:var(--g);font-weight:800;text-align:center}
+.sheet{border:1px solid #cfd8d2;border-radius:12px;overflow:hidden;background:#fff;font-size:13px;min-width:0}
+.sbar{display:flex;justify-content:space-between;background:#217346;color:#fff;padding:8px 12px;font-weight:700;font-size:12.5px}
+.sbar .ok{background:rgba(255,255,255,.2);border-radius:99px;padding:1px 8px}
+.sheet table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.sheet th{background:#f3f6f4;color:#46564c;font-weight:700;text-align:left;padding:6px 8px;border-bottom:1px solid #dfe6e1;font-size:12px}
+.sheet td{padding:6px 8px;border-bottom:1px solid #eef2ef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.sfoot{display:flex;gap:14px;flex-wrap:wrap;padding:9px 12px;background:#fafcfb;font-size:12.5px;color:#46564c}
+.sfoot b{color:#1a1714}.sfoot .w{color:#c2410c}
+.cadimg{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;padding:8px}
+.cadimg img{width:100%;height:auto;display:block}
+.xl{list-style:none;margin-top:18px;display:grid;gap:8px}
+.xl li{position:relative;padding-left:18px;font-weight:600;font-size:16px}
+.xl li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--g)}
+.ex{margin-top:auto;padding-top:16px;font-size:13px;color:var(--muted)}
+.ex a{color:var(--g3);font-weight:700}
+/* 이런 것도 만들 수 있어요 */
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mg{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--card-sh);padding:24px;min-width:0}
+.mg h3{font-size:20px;font-weight:820;letter-spacing:-.02em;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.mg h3::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--g)}
+.mg ul{list-style:none;display:grid;gap:8px}
+.mg li{background:var(--card2);border:1px solid #efe8dc;border-radius:14px;padding:12px 14px;transition:border-color .15s,transform .15s}
+.mg li:hover{border-color:#dccfb9;transform:translateY(-1px)}
+.mg li b{display:block;font-size:16px;font-weight:750}
+.mg li span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.mnote{margin-top:22px;color:var(--muted);font-size:16px}
+.mnote a{color:var(--g3);font-weight:700}
+/* 학교 앱 강조 */
+.school{display:grid;grid-template-columns:.9fr 1.6fr;gap:28px;align-items:center;background:linear-gradient(135deg,#eef0ff,#f6efff 55%,#fff4ea);border:1px solid #e3def5;border-radius:32px;padding:clamp(22px,3vw,44px);margin-bottom:22px;box-shadow:var(--card-sh)}
+.school .badge{display:inline-block;background:#4f46e5;color:#fff;font-size:13px;font-weight:800;border-radius:99px;padding:4px 12px;margin-bottom:14px}
+.school h3{font-size:clamp(30px,3vw,46px);font-weight:860;letter-spacing:-.04em;line-height:1.05;color:#1e1b4b}
+.school p{color:#4b4a68;margin:14px 0 16px;font-size:17px}
+.school ul{list-style:none;display:grid;gap:8px}
+.school li{font-weight:650;color:#2e2b5f;padding-left:18px;position:relative}
+.school li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:#6366f1}
+.sshots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-width:0}
+.sshots img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:12px;border:1px solid #ddd8f0;box-shadow:0 10px 24px -16px rgba(40,30,120,.4)}
+.sshots .big{grid-column:1/-1;border-radius:16px}
+@media (max-width:1000px){.xc,.mgrid,.school{grid-template-columns:1fr}}
+@media (max-width:600px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.files .xf{flex-direction:row;flex-wrap:wrap}.files i{flex:1 1 45%}.sheet td:nth-child(5),.sheet th:nth-child(5){display:none}}
 /* 등장 */
 @media (prefers-reduced-motion:no-preference){
   .js [data-in]{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
@@ -269,7 +353,7 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 <body>
 <header class="top"><div class="in">
   <a class="wm" href="index.html">MIN<b>JINE</b></a>
-  <nav aria-label="주 메뉴"><a href="coin.html">주식 · 암호화폐</a><a href="#calc">비용 계산기</a><a href="#what">할 수 있는 일</a><a href="#screens">실제 화면</a><a href="#steps">진행 순서</a></nav>
+  <nav aria-label="주 메뉴"><a href="coin.html">주식 · 암호화폐</a><a href="#excel">엑셀 · CAD</a><a href="#more">만들 수 있는 것</a><a href="#what">할 수 있는 일</a><a href="#screens">실제 화면</a><a href="#steps">진행 순서</a></nav>
   <a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener">무료 상담</a>
 </div></header>
 
@@ -280,7 +364,7 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
       <h1 data-in>사무 자동화로<br>업무 효율을<br><em>높이세요.</em></h1>
       <p class="sub" data-in style="--d:90ms">장부 · 주문 · 영업 메일 같은 <b>사무 자동화</b>부터 <b>선물 자동매매</b>, <b>유튜브 영상 자동화</b>, <b>채팅방 자동화</b>까지. 반복 업무는 MINJINE 프로그램에 맡기고, 사람은 더 중요한 일에 집중하세요.</p>
       <div class="acts" data-in style="--d:160ms">
-        <a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i>카톡으로 무료 상담</a>
+        <a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><svg class="kb" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.84 5.31 4.62 6.73l-.98 3.6c-.09.33.28.6.57.41l4.3-2.85c.49.07.99.11 1.49.11 5.52 0 10-3.58 10-8S17.52 3 12 3z"/></svg>카톡으로 무료 상담</a>
         <a class="btn ghost" href="#calc">반복 업무 비용 계산해 보기</a>
       </div>
       <div class="trust" data-in style="--d:220ms">
@@ -305,7 +389,7 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 </div>
 
 <section id="calc"><div class="in">
-  <div class="sh"><h2 data-in><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/timer.svg)" aria-hidden="true"></i>반복 업무에 1년 동안 얼마를 쓰고 있을까요?</h2><p data-in>막대를 움직여 보세요. 매일 반복하는 업무 시간이 1년이면 이만큼 쌓입니다.</p></div>
+  <div class="sh"><h2 data-in>반복 업무에 1년 동안 얼마를 쓰고 있을까요?</h2><p data-in>막대를 움직여 보세요. 매일 반복하는 업무 시간이 1년이면 이만큼 쌓입니다.</p></div>
   <div class="calc">
     <div class="box" data-in>
       <div class="row"><label for="ppl">반복 업무를 하는 사람 <span class="val" id="v-ppl"></span></label><input id="ppl" type="range" min="1" max="20" step="1" value="2"></div>
@@ -329,29 +413,107 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
   <div class="sh"><h2 data-in>두 갈래로 자동화합니다</h2><p data-in>사무실의 반복 업무, 그리고 사람이 잠든 사이에도 돌아야 하는 일. 둘 다 직접 만들어 지금 돌리고 있습니다.</p></div>
   <div class="tracks">
     <div class="trk light" data-in>
-      <h3><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/briefcase.svg)" aria-hidden="true"></i>사무 자동화</h3>
+      <h3>사무 자동화 <small>5가지</small></h3>
       <p>회사 양식과 엑셀은 그대로 두고, 반복되는 부분만 프로그램이 처리합니다.</p>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/book-open.svg)" aria-hidden="true"></i><div><b>거래 장부 <i class="real">실제 회사 사용</i></b><span>거래 입력, 미수금, 세금계산서 발행 현황을 한 화면에. 직원마다 전화번호로 로그인.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/mail.svg)" aria-hidden="true"></i><div><b>영업 메일 도우미</b><span>업체 주소만 넣으면 페이지를 읽고 그 업체 맞춤 제안 메일 초안까지.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/factory.svg)" aria-hidden="true"></i><div><b>공장 작업 관리</b><span>엑셀 · CSV 작업 파일을 올리면 공정 현황과 긴급 작업을 바로 보여 줍니다.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/receipt.svg)" aria-hidden="true"></i><div><b>고객관리 · 영수증 · 부품 식별표</b><span>작은 가게 고객 관리와 영수증, 공장 부품 카드 인쇄.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/calendar-days.svg)" aria-hidden="true"></i><div><b>시간표 메이커</b><span>학원 · 학교 시간표를 15가지 디자인으로 만들어 A4로 인쇄.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/ledger.jpg" alt="" width="640" height="400" loading="lazy"><div><b>거래 장부 <i class="real">실제 회사 사용</i></b><span>거래 입력, 미수금, 세금계산서 발행 현황을 한 화면에. 직원마다 전화번호로 로그인.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/salesmail.jpg" alt="" width="640" height="400" loading="lazy"><div><b>영업 메일 도우미</b><span>업체 주소만 넣으면 페이지를 읽고 그 업체 맞춤 제안 메일 초안까지.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/factory.jpg" alt="" width="640" height="400" loading="lazy"><div><b>공장 작업 관리</b><span>엑셀 · CSV 작업 파일을 올리면 공정 현황과 긴급 작업을 바로 보여 줍니다.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/receipt.jpg" alt="" width="640" height="400" loading="lazy"><div><b>고객관리 · 영수증 · 부품 식별표</b><span>작은 가게 고객 관리와 영수증, 공장 부품 카드 인쇄.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/timetable.jpg" alt="" width="640" height="400" loading="lazy"><div><b>시간표 메이커</b><span>학원 · 학교 시간표를 15가지 디자인으로 만들어 A4로 인쇄.</span></div></div>
     </div>
     <div class="trk dark" data-in style="--d:100ms">
-      <h3><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/zap.svg)" aria-hidden="true"></i>24시간 자동화</h3>
+      <h3>24시간 자동화 <small>5가지</small></h3>
       <p>실시간 자료를 받아 스스로 판단하고, 정한 시간에 알아서 움직입니다.</p>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/trending-up.svg)" aria-hidden="true"></i><div><b>선물 자동매매 제작</b><span>시세를 실시간으로 받아 시장 흐름을 10단계로 나누고, 규칙에 맞을 때만 주문. 진입 · 목표 · 손절 카드를 텔레그램으로, 매매일지로 결과 추적.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/clapperboard.svg)" aria-hidden="true"></i><div><b>유튜브 영상 자동화</b><span>자료 → 대본 → 장면 그림 → 목소리 · 자막 → 합성 → 예약 올리기. 채널 두 개를 하루 편성표대로.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i><div><b>채팅방 자동화</b><span>카톡 · 당근 채팅방에 정해진 시간마다 소식 카드, 질문엔 방장 말투로 답. 해외 뉴스는 번역해서.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/smartphone.svg)" aria-hidden="true"></i><div><b>텔레그램 원격 PC 제어</b><span>밖에서 휴대폰으로 회사 PC 프로그램을 켜고 끄고, 화면을 찍어 받아 봅니다.</span></div></div>
-      <div class="it"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/arrow-left-right.svg)" aria-hidden="true"></i><div><b>랜전송</b><span>같은 공유기의 PC 두 대를 서로의 탐색기처럼. 끌어다 놓으면 복사, 문서는 그 자리에서 고쳐 저장.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/trade.jpg" alt="" width="640" height="400" loading="lazy"><div><b>선물 자동매매 제작</b><span>시세를 실시간으로 받아 시장 흐름을 10단계로 나누고, 규칙에 맞을 때만 주문. 진입 · 목표 · 손절 카드를 텔레그램으로, 매매일지로 결과 추적.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/youtube.jpg" alt="" width="640" height="400" loading="lazy"><div><b>유튜브 영상 자동화</b><span>자료 → 대본 → 장면 그림 → 목소리 · 자막 → 합성 → 예약 올리기. 채널 두 개를 하루 편성표대로.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/chat.jpg" alt="" width="640" height="400" loading="lazy"><div><b>채팅방 자동화</b><span>카톡 · 당근 채팅방에 정해진 시간마다 소식 카드, 질문엔 방장 말투로 답. 해외 뉴스는 번역해서.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/telegram.jpg" alt="" width="640" height="400" loading="lazy"><div><b>텔레그램 원격 PC 제어</b><span>밖에서 휴대폰으로 회사 PC 프로그램을 켜고 끄고, 화면을 찍어 받아 봅니다.</span></div></div>
+      <div class="it"><img class="th" src="thumbs/lan.jpg" alt="" width="640" height="400" loading="lazy"><div><b>랜전송</b><span>같은 공유기의 PC 두 대를 서로의 탐색기처럼. 끌어다 놓으면 복사, 문서는 그 자리에서 고쳐 저장.</span></div></div>
       <p class="legal">자동매매는 주문하신 규칙대로 움직이는 도구를 만드는 일입니다. 수익을 약속하거나 종목을 추천하지 않습니다.</p>
     </div>
   </div>
 </div></section>
 
+<section id="excel"><div class="in">
+  <div class="sh"><h2 data-in>엑셀 · CAD 업무도 자동으로</h2><p data-in>매일 여는 엑셀, 매번 손으로 그리는 도면. 지금 쓰는 파일 그대로 받아서 정리하고, 그리고, 뽑아 드립니다.</p></div>
+  <div class="xc">
+    <article class="xcard" data-in>
+      <div class="xhead"><b>엑셀 자동화</b><span>판매처 주문 파일 → 송장 · 매출 요약</span></div>
+      <div class="flow" data-ui aria-label="엑셀 자동화 화면 예시">
+        <div class="files">
+          <div class="xf"><i>쿠팡_주문.xlsx</i><i>스마트스토어_주문.xlsx</i><i>11번가_주문.xlsx</i><i>자사몰_주문.csv</i></div>
+          <p>판매처마다 다른 양식 4개</p>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="sheet">
+          <div class="sbar"><span>통합_주문_11월9일.xlsx</span><span class="ok">자동 완성</span></div>
+          <table><thead><tr><th>판매처</th><th>주문번호</th><th>상품 · 옵션</th><th>수량</th><th>송장</th></tr></thead>
+          <tbody><tr><td>쿠팡</td><td>2611-0931</td><td>린넨 셔츠 · 화이트 L</td><td>2</td><td>6824…</td></tr>
+          <tr><td>스마트스토어</td><td>2611-1187</td><td>와이드 팬츠 · 베이지 M</td><td>1</td><td>6824…</td></tr>
+          <tr><td>11번가</td><td>2611-0442</td><td>에코백 · 블랙</td><td>3</td><td>6824…</td></tr>
+          <tr><td>자사몰</td><td>2611-0078</td><td>린넨 셔츠 · 네이비 M</td><td>1</td><td>6824…</td></tr></tbody></table>
+          <div class="sfoot"><span>오늘 주문 <b>128건</b></span><span>매출 <b>4,312,000원</b></span><span>재고 부족 <b class="w">3개</b></span></div>
+        </div>
+      </div>
+      <ul class="xl"><li>여러 판매처 · 여러 파일을 한 표로 합치기</li><li>송장번호 일괄 입력용 파일 만들기</li><li>일별 · 월별 매출 요약표와 재고 부족 알림</li></ul>
+      <p class="ex">화면 예시입니다 · 상품과 숫자는 예시예요</p>
+    </article>
+    <article class="xcard" data-in style="--d:100ms">
+      <div class="xhead"><b>CAD 자동화</b><span>엑셀 목록 → DXF 도면 자동 생성</span></div>
+      <div class="cadimg"><img src="thumbs/cad.jpg" width="1600" height="527" alt="엑셀 목록 3줄로 자동 생성한 철판 가공 도면 3장 (구멍 · 치수 · 제목란 포함)" loading="lazy"></div>
+      <ul class="xl"><li>엑셀 치수표로 도면 수십 장을 한 번에 그리기</li><li>도면 일괄 PDF 출력 · 이름 붙여 저장</li><li>도면 속 부품표(BOM)를 엑셀로 뽑기</li></ul>
+      <p class="ex">위 그림은 MINJINE 프로그램이 실제로 만든 도면입니다 · <a href="thumbs/cad_example.dxf" download>DXF 파일 받기</a> · 부품과 치수는 예시예요</p>
+    </article>
+  </div>
+</div></section>
+
+<section id="more"><div class="in">
+  <div class="sh"><h2 data-in>이런 것도 만들 수 있어요</h2><p data-in>쇼핑몰과 회사에서 자주 부탁받는 자동화 예시입니다. 목록에 없어도 반복되는 일이라면 대부분 만들 수 있습니다.</p></div>
+  <div class="mgrid">
+    <div class="mg" data-in><h3>쇼핑몰</h3><ul>
+      <li><b>주문 한 표로 합치기</b><span>판매처마다 다른 주문 양식을 하나로</span></li>
+      <li><b>송장번호 일괄 입력</b><span>택배사 파일 → 판매처 업로드 파일</span></li>
+      <li><b>옵션별 재고 맞추기</b><span>팔린 만큼 재고표 자동 차감 · 부족 알림</span></li>
+      <li><b>정산 맞춰 보기</b><span>판매처 정산 금액과 실제 입금 비교</span></li>
+      <li><b>상세페이지 · 상품 문구</b><span>상품 정보로 소개 글 · 이미지 일괄 만들기</span></li>
+      <li><b>리뷰 · 문의 정리</b><span>흩어진 리뷰와 문의를 엑셀 한 장으로</span></li>
+    </ul></div>
+    <div class="mg" data-in style="--d:80ms"><h3>회사 사무</h3><ul>
+      <li><b>견적서 · 거래명세서</b><span>엑셀에 적으면 회사 양식 PDF 로 자동 작성</span></li>
+      <li><b>여러 엑셀 합치기 · 보고서</b><span>지점 · 담당자별 파일을 모아 주간 보고서</span></li>
+      <li><b>급여 · 근태 집계</b><span>출퇴근 기록으로 근무 시간 · 수당 계산표</span></li>
+      <li><b>영수증 · PDF → 엑셀</b><span>사진 · PDF 속 숫자를 표로 옮기기</span></li>
+      <li><b>매일 아침 보고 메일</b><span>어제 실적을 정리해 정해진 시각에 발송</span></li>
+      <li><b>파일 · 사진 이름 정리</b><span>수백 개 파일을 규칙대로 한 번에 정리</span></li>
+    </ul></div>
+    <div class="mg" data-in style="--d:160ms"><h3>제조 · CAD</h3><ul>
+      <li><b>엑셀로 도면 자동 생성</b><span>치수표 한 줄 = 도면 한 장 (DXF)</span></li>
+      <li><b>도면 일괄 PDF 출력</b><span>폴더 속 도면을 이름 붙여 한 번에</span></li>
+      <li><b>부품표(BOM) 추출</b><span>도면 속 부품 목록을 엑셀로</span></li>
+      <li><b>작업지시서 · 식별표</b><span>공정별 작업지시서와 부품 카드 인쇄</span></li>
+      <li><b>공정 현황판</b><span>작업 파일을 올리면 진행 · 긴급 현황</span></li>
+      <li><b>입출고 · 자재 관리</b><span>자재 들어오고 나간 기록과 남은 수량</span></li>
+    </ul></div>
+  </div>
+  <p class="mnote" data-in>모두 회사마다 양식에 맞춰 새로 만듭니다. 비슷한 일이 있으면 <a href="https://open.kakao.com/me/paming" target="_blank" rel="noopener">카톡 한 줄</a>로 물어보세요.</p>
+</div></section>
+
 <section id="screens"><div class="in">
-  <div class="sh"><h2 data-in><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/monitor.svg)" aria-hidden="true"></i>말보다 실제 화면</h2><p data-in>지금 매일 쓰고 있는 프로그램 화면입니다.</p></div>
+  <div class="sh"><h2 data-in>말보다 실제 화면</h2><p data-in>지금 매일 쓰고 있는 프로그램 화면입니다.</p></div>
+  <article class="school" data-in>
+    <div class="stext">
+      <span class="badge">대표 작품</span>
+      <h3>MINJINE SCHOOL</h3>
+      <p>3D 선생님이 말로 설명하고, 질문에 답하고, 강의와 영상까지 스스로 만드는 학습 앱. 이 홈페이지의 홍보영상도 이 앱이 만들었습니다.</p>
+      <ul><li>3D 진행자 · 목소리 · 입 모양</li><li>강의 117개 · 학습 기록 · 오답 노트</li><li>대본만 넣으면 쇼츠 영상 완성</li></ul>
+    </div>
+    <div class="sshots">
+      <img class="big" src="school/home.jpg" width="1600" height="1000" alt="MINJINE SCHOOL 홈 화면: 3D 선생님 하리와 오늘의 학습" loading="lazy">
+      <img src="school/home2.jpg" width="1600" height="1000" alt="MINJINE SCHOOL 강의 목록 화면" loading="lazy">
+      <img src="school/stat.jpg" width="1600" height="1000" alt="MINJINE SCHOOL 내 학습현황 화면" loading="lazy">
+      <img src="school/studio.jpg" width="1600" height="1000" alt="MINJINE SCHOOL 영상 제작실 화면" loading="lazy">
+    </div>
+  </article>
   <div class="bento">
     <figure class="b1" data-in><img src="kwanje.jpg" width="1900" height="1260" alt="MINJINE 관제판 실제 화면" loading="lazy"><figcaption><b>관제판</b> 프로그램 13개의 켜짐 · 꺼짐 · 문제를 한 화면에서 보고, 단추로 켜고 끕니다.</figcaption></figure>
     <figure class="b2" data-in style="--d:80ms"><img src="ytauto.jpg" width="1440" height="900" alt="유튜브 자동화 대시보드 실제 화면" loading="lazy"><figcaption><b>유튜브 영상 자동화</b> 채널별 하루 편성, 만드는 중 · 올릴 준비 · 올림 · 문제를 한눈에.</figcaption></figure>
@@ -381,10 +543,10 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 <section id="steps"><div class="in">
   <div class="sh"><h2 data-in>카톡 한 줄이면 시작합니다</h2><p data-in>정리된 문서는 없어도 됩니다. 하고 싶은 일만 말씀해 주세요.</p></div>
   <div class="steps">
-    <div class="st" data-in><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i><b>묻기</b><em>카톡 한 줄</em><p>자동화하고 싶은 업무를 한 줄로 적어 보내 주세요.</p></div>
-    <div class="st" data-in style="--d:80ms"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/file-text.svg)" aria-hidden="true"></i><b>정하기</b><em>하루 이틀</em><p>될지, 어떻게 만들지, 언제까지인지 먼저 말씀드립니다.</p></div>
-    <div class="st" data-in style="--d:160ms"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/wrench.svg)" aria-hidden="true"></i><b>만들기</b><em>보통 1~3주</em><p>중간 결과를 보여 드리고, 실제로 쓰실 PC에서 시험합니다.</p></div>
-    <div class="st" data-in style="--d:240ms"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/package-check.svg)" aria-hidden="true"></i><b>건네기</b><em>쓰는 법까지</em><p>설치하고 쓰는 법을 알려 드리고, 막히면 카톡으로.</p></div>
+    <div class="st" data-in><span class="no">1</span><b>묻기</b><em>카톡 한 줄</em><p>자동화하고 싶은 업무를 한 줄로 적어 보내 주세요.</p></div>
+    <div class="st" data-in style="--d:80ms"><span class="no">2</span><b>정하기</b><em>하루 이틀</em><p>될지, 어떻게 만들지, 언제까지인지 먼저 말씀드립니다.</p></div>
+    <div class="st" data-in style="--d:160ms"><span class="no">3</span><b>만들기</b><em>보통 1~3주</em><p>중간 결과를 보여 드리고, 실제로 쓰실 PC에서 시험합니다.</p></div>
+    <div class="st" data-in style="--d:240ms"><span class="no">4</span><b>건네기</b><em>쓰는 법까지</em><p>설치하고 쓰는 법을 알려 드리고, 막히면 카톡으로.</p></div>
   </div>
 </div></section>
 
@@ -404,7 +566,7 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 <div class="cta"><div class="in">
   <h2 data-in>반복되는 업무,<br><em>한 줄</em>만 적어 보내세요.</h2>
   <p data-in>읽고 직접 답합니다. 될 일인지부터 솔직하게 말씀드립니다.</p>
-  <div class="acts" data-in><a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i>카톡으로 무료 상담</a></div>
+  <div class="acts" data-in><a class="btn kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><svg class="kb" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.84 5.31 4.62 6.73l-.98 3.6c-.09.33.28.6.57.41l4.3-2.85c.49.07.99.11 1.49.11 5.52 0 10-3.58 10-8S17.52 3 12 3z"/></svg>카톡으로 무료 상담</a></div>
   <a class="mail" data-in href="mailto:miniming10119@gmail.com?subject=MINJINE%20%EC%9E%90%EB%8F%99%ED%99%94%20%EC%83%81%EB%8B%B4">miniming10119@gmail.com</a>
 </div></div>
 <footer><div class="in">
@@ -416,10 +578,10 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 <script>
 (function(){
   document.documentElement.classList.add('js');
-  var LM={"Speech balloon": "message-circle", "Chart increasing": "trending-up", "Briefcase": "briefcase", "Ledger": "book-open", "Envelope with arrow": "mail", "Factory": "factory", "Receipt": "receipt", "Spiral calendar": "calendar-days", "Rocket": "zap", "Clapper board": "clapperboard", "Mobile phone": "smartphone", "Outbox tray": "arrow-left-right", "Stopwatch": "timer", "Desktop computer": "monitor", "Memo": "file-text", "Hammer and wrench": "wrench", "Wrapped gift": "package-check", "Magnifying glass tilted left": "search", "Shopping bags": "shopping-bag", "Package": "package", "School": "graduation-cap", "Convenience store": "store"};function ic(n){return 'https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/'+LM[n]+'.svg';}
-  // 흐르는 줄
+  // 흐르는 줄 (작은 그림 = 그 프로그램의 실제 화면)
+  var TH={"거래 장부": "ledger", "선물 자동매매": "trade", "유튜브 영상 자동화": "youtube", "영업 메일 도우미": "salesmail", "카톡 · 당근 채팅방 봇": "chat", "공장 작업 관리": "factory", "텔레그램 원격 PC 제어": "telegram", "랜전송": "lan", "급락 감지 스캐너": "trade", "관제판": "control", "시간표 메이커": "timetable", "고객관리 · 영수증": "receipt"};
   var names=[['거래 장부','Ledger'],['선물 자동매매','Chart increasing'],['유튜브 영상 자동화','Clapper board'],['영업 메일 도우미','Envelope with arrow'],['카톡 · 당근 채팅방 봇','Speech balloon'],['공장 작업 관리','Factory'],['텔레그램 원격 PC 제어','Mobile phone'],['랜전송','Outbox tray'],['급락 감지 스캐너','Magnifying glass tilted left'],['관제판','Desktop computer'],['시간표 메이커','Spiral calendar'],['고객관리 · 영수증','Receipt']];
-  var h=names.map(function(n){return '<span><i class="ic" style="--u:url('+ic(n[1])+')"></i>'+n[0]+'</span>'}).join('');
+  var h=names.map(function(n){return '<span><img src="thumbs/'+(TH[n[0]]||'control')+'.jpg" alt="">'+n[0]+'</span>'}).join('');
   document.getElementById('marq').innerHTML=h+h;
 
   // 계산기
@@ -449,7 +611,7 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
   ];
   var pt=document.getElementById('ptabs'),po=document.getElementById('pout');
   function pshow(i){var p=P[i];po.innerHTML='<h3>'+p[0]+'</h3><p class="made">이미 만든 것: '+p[6]+'</p><ul>'+p.slice(2,6).map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';[].forEach.call(pt.children,function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')})}
-  P.forEach(function(p,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML='<i class="ic" style="--u:url('+ic(p[1])+')"></i>'+p[0];b.addEventListener('click',function(){pshow(i)});pt.appendChild(b)});
+  P.forEach(function(p,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=p[0];b.addEventListener('click',function(){pshow(i)});pt.appendChild(b)});
   pshow(0);
   // 등장
   var els=document.querySelectorAll('[data-in]');

@@ -74,21 +74,60 @@ footer a{color:#9a9184}
 
 /* 아이콘: 이모지 대신 한 가지 선 아이콘(Lucide, ISC), 글자색으로 칠함 */
 .ic{display:inline-block;width:1em;height:1em;flex:none;background:currentColor;-webkit-mask:var(--u) center/contain no-repeat;mask:var(--u) center/contain no-repeat;vertical-align:-.12em}
+.kb{width:22px;height:22px;flex:none}
+.tag{border-radius:999px;padding:7px 14px 7px 12px;font-size:15px}
+.mk .tag{background:#18263b;color:#c9d6ea}.of .tag{background:var(--paper2);color:#3a352d}
+.tag .dot{width:8px;height:8px;border-radius:50%;background:var(--or)}
+.mk .tag .dot{background:#6ea8ff}
+.door{border:1px solid rgba(255,255,255,.06)}.door.of{border-color:#e2dacb}
+.shots img{border:1px solid rgba(0,0,0,.08)}
+
+/* 사무 자동화를 위에 크게, 주식 · 암호화폐는 아래에. 문 안은 왼쪽 글 · 오른쪽 실제 화면 */
+.doors{flex-direction:column;gap:18px}
+.door{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:clamp(24px,3vw,56px);align-content:start;flex:none}
+.door:hover,.door:focus-within{flex-grow:0}
+.door>*:not(.shots):not(.cover){grid-column:1}
+.door .tag,.door .go{justify-self:start}
+.door .shots{grid-column:2;grid-row:1/span 6;margin-top:0;align-self:center}
+.door.mk{padding-top:clamp(22px,2.4vw,36px);padding-bottom:clamp(22px,2.4vw,36px)}
+.door.mk h2{font-size:clamp(26px,2.6vw,42px)}
+@media (max-width:900px){.door{grid-template-columns:1fr}.door .shots{grid-column:1;grid-row:auto;margin-top:22px}}
+
+/* 실제 화면 모음: 겹치지 않게 큰 한 장 + 작은 두 장 */
+.door .shots{position:static;aspect-ratio:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.door .shots img,.mk .s1,.mk .s2,.mk .s3,.of .s1,.of .s2,.of .s3{position:static;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:14px;transform:none!important;box-shadow:0 18px 36px -22px rgba(0,0,0,.55)}
+.door .shots .s1{grid-column:1/-1}
+.door:hover .shots img{transform:none!important}
+.door .shots img{transition:box-shadow .25s}
+.door:hover .shots .s1{box-shadow:0 26px 50px -24px rgba(0,0,0,.6)}
+.mk .shots{grid-template-columns:1fr 1fr 1fr}.mk .shots .s1{grid-column:auto}
 </style>
 </head>
 <body>
 <div class="bar">
   <a class="wm" href="index.html">MIN<i>JINE</i></a>
-  <a class="kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/message-circle.svg)" aria-hidden="true"></i>카톡 상담</a>
+  <a class="kk" href="https://open.kakao.com/me/paming" target="_blank" rel="noopener"><svg class="kb" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.48 3 2 6.58 2 11c0 2.83 1.84 5.31 4.62 6.73l-.98 3.6c-.09.33.28.6.57.41l4.3-2.85c.49.07.99.11 1.49.11 5.52 0 10-3.58 10-8S17.52 3 12 3z"/></svg>카톡 상담</a>
 </div>
 <header class="head">
   <h1>사람이 하던 일,<br><b>24시간</b> 프로그램이.</h1>
   <p>MINJINE은 시장을 지켜보는 자동매매와, 회사의 반복 업무를 줄여 주는 사무 자동화를 만듭니다. 둘 다 직접 만들어 지금 매일 돌리고 있습니다.</p>
 </header>
 <main class="doors">
+  <section class="door of" aria-labelledby="of-h">
+    <a class="cover" href="office.html" aria-label="사무 자동화 보기" tabindex="-1"></a>
+    <span class="tag"><i class="dot" aria-hidden="true"></i>사무 자동화</span>
+    <h2 id="of-h">사무 자동화로 효율을 높입니다</h2>
+    <ul><li>엑셀 · CAD 자동화</li><li>거래 장부</li><li>영업 메일</li><li>유튜브 영상 자동화</li><li>채팅방 자동 응답</li><li>3D 선생님 학습 앱</li><li>원격 PC 제어</li></ul>
+    <a class="go" href="office.html">사무 자동화 보기 →</a>
+    <div class="shots" aria-hidden="true">
+      <img class="s1" src="school/home.jpg" alt="" width="1600" height="1000">
+      <img class="s2" src="kwanje.jpg" alt="" width="1900" height="1260">
+      <img class="s3" src="ytauto.jpg" alt="" width="1440" height="900">
+    </div>
+  </section>
   <section class="door mk" aria-labelledby="mk-h">
     <a class="cover" href="coin.html" aria-label="주식 · 암호화폐 자동화 보기" tabindex="-1"></a>
-    <span class="tag"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/trending-up.svg)" aria-hidden="true"></i>주식 · 암호화폐 자동화</span>
+    <span class="tag"><i class="dot" aria-hidden="true"></i>주식 · 암호화폐 자동화</span>
     <h2 id="mk-h">시장은 MINJINE이 지켜봅니다</h2>
     <ul><li>선물 · 현물 자동매매</li><li>급락 감지 스캐너</li><li>텔레그램 신호 카드</li><li>카톡 주식 · 코인방 봇</li><li>분석 도구 10종</li></ul>
     <a class="go" href="coin.html">자동매매 · 분석 보기 →</a>
@@ -96,18 +135,6 @@ footer a{color:#9a9184}
       <img class="s1" src="h10.jpg" alt="" width="800" height="500">
       <img class="s2" src="c09.jpg" alt="" width="800" height="500">
       <img class="s3" src="c12.jpg" alt="" width="800" height="500">
-    </div>
-  </section>
-  <section class="door of" aria-labelledby="of-h">
-    <a class="cover" href="office.html" aria-label="사무 자동화 보기" tabindex="-1"></a>
-    <span class="tag"><i class="ic" style="--u:url(https://cdn.jsdelivr.net/npm/lucide-static@0.460.0/icons/briefcase.svg)" aria-hidden="true"></i>사무 자동화</span>
-    <h2 id="of-h">사무 자동화로 효율을 높입니다</h2>
-    <ul><li>거래 장부 · 엑셀</li><li>영업 메일</li><li>유튜브 영상 자동화</li><li>채팅방 자동 응답</li><li>원격 PC 제어</li></ul>
-    <a class="go" href="office.html">사무 자동화 보기 →</a>
-    <div class="shots" aria-hidden="true">
-      <img class="s1" src="kwanje.jpg" alt="" width="1900" height="1260">
-      <img class="s2" src="ytauto.jpg" alt="" width="1440" height="900">
-      <img class="s3" src="h14.jpg" alt="" width="800" height="500">
     </div>
   </section>
 </main>
