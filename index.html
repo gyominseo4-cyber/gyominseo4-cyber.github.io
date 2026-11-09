@@ -61,8 +61,15 @@ footer a{color:#9a9184}
 @media (prefers-reduced-motion:reduce){.door,.shots img,.go{transition:none}}
 @media (max-width:900px){
   .doors{flex-direction:column}
-  .door:hover,.door:focus-within{flex-grow:1}
-  .shots{min-height:220px}
+  .door{flex:none}
+  .door:hover,.door:focus-within{flex-grow:0}
+  /* 폰: 겹쳐 놓은 그림 대신 두 장을 나란히 (글자를 덮지 않게) */
+  .shots{aspect-ratio:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}
+  .shots img,.mk .s1,.mk .s2,.mk .s3,.of .s1,.of .s2,.of .s3{position:static;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:left top;transform:none!important}
+  .shots .s3{display:none}
+  .head h1{font-size:clamp(34px,10vw,48px)}
+  .door h2{font-size:clamp(28px,8.4vw,40px)}
+  .go{width:100%;justify-content:center}
 }
 
 /* 아이콘: 이모지 대신 한 가지 선 아이콘(Lucide, ISC), 글자색으로 칠함 */

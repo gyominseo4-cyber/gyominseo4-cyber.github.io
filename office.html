@@ -226,6 +226,10 @@ footer .wmbig{font-size:21vw;font-weight:900;letter-spacing:-.04em;line-height:.
 .side figcaption{font-size:13px;color:var(--on-dark2);padding:6px 4px 2px}
 @media (max-width:1000px){.promo{justify-self:stretch;max-width:none;grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.promo{grid-template-columns:1fr}.phone{max-width:320px;margin:0 auto}.side{display:none}}
+
+/* 폰에서 큰 그림이 칸을 밀어내지 않게 */
+.bento>*,.calc>*,.tracks>*,.gal>*,.pick>*,.faq>*,.steps>*,.hero .in>*,.promo>*{min-width:0}
+@media (max-width:600px){.hero .trust{gap:18px}.hero .trust>div{flex:1 1 40%}.sh h2{font-size:clamp(28px,8vw,40px)}}
 /* 등장 */
 @media (prefers-reduced-motion:no-preference){
   .js [data-in]{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
